@@ -1,0 +1,78 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    bool isAttacking;
+    float movementSpeed = 5f;
+
+    Vector2 movement;
+    List<Vector3> rewindPositions = new List<Vector3>();
+    int rewindIndex = 1;
+
+    Animator animator;
+    Rigidbody2D rb;
+
+    public GameObject afterimagePrefab;
+    GameObject afterimage;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        afterimage = Instantiate(afterimagePrefab, transform.position, Quaternion.identity);
+    }
+
+    void Update()
+    {   
+        rewindPositions.Add(transform.position);
+
+        // After 2 seconds, an afterimage will start tracking the player's previous position
+        if (rewindPositions.Count > 120) {
+            rewindIndex ++;
+            if (rewindPositions[rewindIndex].x != rewindPositions[rewindIndex-2].x || rewindPositions[rewindIndex].y != rewindPositions[rewindIndex-2].y) {
+                afterimage.GetComponent<Animator>().SetBool("moving", true);
+                afterimage.transform.localRotation = (rewindPositions[rewindIndex].x > rewindPositions[rewindIndex-2].x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+            } else {
+                afterimage.GetComponent<Animator>().SetBool("moving", false);
+            }
+            afterimage.transform.position = rewindPositions[rewindIndex];
+        }
+        CheckInput();
+    }
+
+    void FixedUpdate() {
+        Move(movement);
+    }
+
+    void CheckInput() {
+        // Check for movement and change animations accordingly
+        movement.x = Input.GetAxis("Horizontal");
+        movement.y = Input.GetAxis("Vertical");
+
+        animator.SetBool("moving", (rb.velocity == Vector2.zero || isAttacking) ? false : true);
+
+        // Listen for rewind key press
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Rewind();
+        }
+
+    }
+
+    void Move(Vector2 movement) {
+        rb.velocity = movement * movementSpeed;
+
+        if (isAttacking) rb.velocity *= 0.5f;
+
+        if (!isAttacking) {
+            // Rotate entity while moving
+            if (rb.velocity.x != 0) transform.localRotation = (rb.velocity.x > 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+
+        }
+    }
+
+    void Rewind() {
+        transform.position = rewindPositions[rewindIndex];
+    }
+}
