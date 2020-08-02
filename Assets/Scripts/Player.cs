@@ -56,7 +56,8 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (!isBeingAttacked) Move(movement);
+        if (isBeingAttacked) return;
+        Move(movement);
     }
 
     void CheckInput() {
@@ -108,10 +109,10 @@ public class Player : MonoBehaviour
 
     public IEnumerator MiniDash() {
         isBeingAttacked = true;
-        rb.AddForce(direction * 500f, ForceMode2D.Impulse);
+        rb.AddForce(direction * 8f, ForceMode2D.Impulse);
         // Create Crescent
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.05f);
         isBeingAttacked = false;
 
     }

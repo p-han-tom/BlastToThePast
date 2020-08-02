@@ -17,7 +17,7 @@ public class InAbility : MonoBehaviour
 
     public bool cancelAttack = false;
     public void attackCheckpoint() {
-        GetComponent<Player>().MiniDash();
+        StartCoroutine(GetComponent<Player>().MiniDash());
         if (cancelAttack) {
             cancelAttack = false;
             GetComponent<Player>().isAttacking = false;
