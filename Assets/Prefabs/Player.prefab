@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611e768f60f2aa34e9e2364af5747dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  afterimagePrefab: {fileID: 0}
 --- !u!95 &5441025114044346213
 Animator:
   serializedVersion: 3
