@@ -22,6 +22,7 @@ public class InAbility : MonoBehaviour
             GetComponent<Player>().isAttacking = false;
             GetComponent<Player>().goOnCooldown();
             GetComponent<Animator>().Rebind();
+            
         }
     }
 }
