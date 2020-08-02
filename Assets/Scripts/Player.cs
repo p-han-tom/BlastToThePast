@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public bool isAttacking;
     float movementSpeed = 5f;
+    float attackCooldown;
+    float attackCooldownDuration = 0.3f;
 
     Vector2 movement;
     List<Vector3> rewindPositions = new List<Vector3>();
@@ -42,6 +44,9 @@ public class Player : MonoBehaviour
             }
             afterimage.transform.position = rewindPositions[rewindIndex];
         }
+        if (attackCooldown > 0f) {
+            attackCooldown -= Time.deltaTime;
+        }
 
         CheckInput();
     }
@@ -61,7 +66,7 @@ public class Player : MonoBehaviour
             Rewind();
         }
 
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0) && attackCooldown <= 0f) {
             animator.SetTrigger("attack");
         }
 
@@ -85,5 +90,9 @@ public class Player : MonoBehaviour
         rewindPositions.Clear();
         afterimage.transform.position = transform.position;
         afterimage.GetComponent<Animator>().Rebind();
+    }
+
+    public void goOnCooldown() {
+        attackCooldown = attackCooldownDuration;
     }
 }

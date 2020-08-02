@@ -10,6 +10,9 @@ public class InAbility : MonoBehaviour
 
     public void onExitAbility() {
         GetComponent<Player>().isAttacking = false;
+        GetComponent<Player>().goOnCooldown();
+        GetComponent<Animator>().Rebind();
+
     }
 
     public bool cancelAbility = false;
@@ -17,6 +20,7 @@ public class InAbility : MonoBehaviour
         if (cancelAbility) {
             cancelAbility = false;
             GetComponent<Player>().isAttacking = false;
+            GetComponent<Player>().goOnCooldown();
             GetComponent<Animator>().Rebind();
         }
     }
