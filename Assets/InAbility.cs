@@ -15,14 +15,16 @@ public class InAbility : MonoBehaviour
 
     }
 
-    public bool cancelAbility = false;
+    public bool cancelAttack = false;
     public void attackCheckpoint() {
-        if (cancelAbility) {
-            cancelAbility = false;
+        GetComponent<Player>().MiniDash();
+        if (cancelAttack) {
+            cancelAttack = false;
             GetComponent<Player>().isAttacking = false;
             GetComponent<Player>().goOnCooldown();
             GetComponent<Animator>().Rebind();
-            
-        }
+        } 
     }
+
+
 }

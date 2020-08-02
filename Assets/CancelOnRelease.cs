@@ -14,7 +14,7 @@ public class CancelOnRelease : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        if (!Input.GetMouseButton(0)) {
-           animator.GetComponent<InAbility>().cancelAbility = true;
+           animator.GetComponent<InAbility>().cancelAttack = true;
        }
     }
 

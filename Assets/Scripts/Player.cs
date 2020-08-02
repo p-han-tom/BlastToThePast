@@ -5,13 +5,17 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public bool isAttacking;
+    bool isBeingAttacked = false;
     float movementSpeed = 5f;
     float attackCooldown;
     float attackCooldownDuration = 0.3f;
+    int rewindIndex = 1;
+
 
     Vector2 movement;
+    Vector2 direction;
+    Vector3 mousePos;
     List<Vector3> rewindPositions = new List<Vector3>();
-    int rewindIndex = 1;
 
     Animator animator;
     Rigidbody2D rb;
@@ -52,10 +56,15 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate() {
-        Move(movement);
+        if (!isBeingAttacked) Move(movement);
     }
 
     void CheckInput() {
+        // Mouse position relative to player
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        direction.Normalize();
+
         // Check for movement and change animations accordingly
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
@@ -67,7 +76,7 @@ public class Player : MonoBehaviour
         }
 
         if (Input.GetMouseButton(0) && attackCooldown <= 0f) {
-            animator.SetTrigger("attack");
+            BasicAttack();
         }
 
     }
@@ -90,6 +99,21 @@ public class Player : MonoBehaviour
         rewindPositions.Clear();
         afterimage.transform.position = transform.position;
         afterimage.GetComponent<Animator>().Rebind();
+    }
+
+    void BasicAttack() {
+        animator.SetTrigger("attack");
+        transform.localRotation = (mousePos.x >= transform.position.x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+    }
+
+    public IEnumerator MiniDash() {
+        isBeingAttacked = true;
+        rb.AddForce(direction * 500f, ForceMode2D.Impulse);
+        // Create Crescent
+
+        yield return new WaitForSeconds(1f);
+        isBeingAttacked = false;
+
     }
 
     public void goOnCooldown() {
