@@ -48,23 +48,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {   
-        rewindPositions.Add(transform.position);
-
-        // After 2 seconds, an afterimage will start tracking the player's previous position
-        if (rewindPositions.Count > 120) {
-            rewindIndex ++;
-
-            // Change animations for if player is moving or idle and rotate player
-            if (rewindPositions[rewindIndex].x != rewindPositions[rewindIndex-2].x || rewindPositions[rewindIndex].y != rewindPositions[rewindIndex-2].y) {
-                afterimage.GetComponent<Animator>().SetBool("moving", true);
-                afterimage.transform.localRotation = (rewindPositions[rewindIndex].x > rewindPositions[rewindIndex-2].x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-            } else {
-                afterimage.GetComponent<Animator>().SetBool("moving", false);
-                if (transform.position == afterimage.transform.position) afterimage.transform.localRotation = transform.localRotation;
-            }
-            afterimage.transform.position = rewindPositions[rewindIndex];
-        }
-
+        MoveAfterImage();
     }
 
     void FixedUpdate() {
@@ -79,7 +63,7 @@ public class Player : MonoBehaviour
         direction.Normalize();
 
         // Check for movement and change animations accordingly
-        moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Horizontal");
         animator.SetBool("moving", (rb.velocity == Vector2.zero || isAttacking) ? false : true);
 
         // Listen for rewind key press
@@ -101,7 +85,7 @@ public class Player : MonoBehaviour
             jumpTimer = jumpDuration;
         }
 
-        if (Input.GetKey(KeyCode.W)) {
+        if (Input.GetKey(KeyCode.W) && isJumping) {
             if (jumpTimer > 0) {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimer-=Time.deltaTime;
@@ -128,5 +112,24 @@ public class Player : MonoBehaviour
         rewindPositions.Clear();
         afterimage.transform.position = transform.position;
         afterimage.GetComponent<Animator>().Rebind();
+    }
+
+    void MoveAfterImage() {
+        rewindPositions.Add(transform.position);
+
+        // After 2 seconds, an afterimage will start tracking the player's previous position
+        if (rewindPositions.Count > 120) {
+            rewindIndex ++;
+
+            // Change animations for if player is moving or idle and rotate player
+            if (rewindPositions[rewindIndex].x != rewindPositions[rewindIndex-2].x || rewindPositions[rewindIndex].y != rewindPositions[rewindIndex-2].y) {
+                afterimage.GetComponent<Animator>().SetBool("moving", true);
+                afterimage.transform.localRotation = (rewindPositions[rewindIndex].x > rewindPositions[rewindIndex-2].x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+            } else {
+                afterimage.GetComponent<Animator>().SetBool("moving", false);
+                if (transform.position == afterimage.transform.position) afterimage.transform.localRotation = transform.localRotation;
+            }
+            afterimage.transform.position = rewindPositions[rewindIndex];
+        }
     }
 }
