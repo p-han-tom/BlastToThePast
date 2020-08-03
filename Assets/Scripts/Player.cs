@@ -51,10 +51,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        MoveAfterImage();
+        
         RotateGun();
         CheckInput();
         Move();
+    }
+    void FixedUpdate() {
+        MoveAfterImage();
     }
 
     void CheckInput()
@@ -160,11 +163,6 @@ public class Player : MonoBehaviour
     {
         pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         pivot.up = direction;
-        
-        // Vector3 clampedAngles = pivot.eulerAngles;
-        // if (clampedAngles.z > 180) clampedAngles.z -= 360;
-        // clampedAngles.z = Mathf.Clamp(clampedAngles.z, -100, 100);
-        // pivot.eulerAngles = clampedAngles;
 
     }
     public bool getIsGrounded()
