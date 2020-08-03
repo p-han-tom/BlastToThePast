@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
         // Listen for gun shot
         if (Input.GetMouseButtonDown(0))
         {
-            transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(direction);
+            transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(mousePos);
         }
     }
 
