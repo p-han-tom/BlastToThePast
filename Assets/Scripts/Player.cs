@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     bool isGrounded;
     bool isJumping;
     Transform feetPos;
-    float checkRadius = 0.5f;
+    float checkRadius = 0.025f;
     float movementSpeed = 5f;
     float jumpForce = 10f;
     float moveInput;
@@ -89,14 +89,14 @@ public class Player : MonoBehaviour
         rb.gravityScale = (isGrounded) ? 5f : 8f;
 
         // Start the jump
-        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKeyDown(KeyCode.W) && isGrounded) {
+        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && isGrounded) {
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
         }
 
         // Jump higher while key is pressed
-        if (Input.GetKey(KeyCode.W) && isJumping) {
+        if (isJumping) {
             if (jumpTimer > 0) {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimer-=Time.deltaTime;
