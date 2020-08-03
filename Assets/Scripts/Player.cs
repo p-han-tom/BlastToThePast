@@ -180,4 +180,7 @@ public class Player : MonoBehaviour
     public void die() {
         Debug.Log("AHHHHHHHHHHHHHHH FUCK");
     }
+    public void win() {
+        Debug.Log("dub");
+    }
 }
