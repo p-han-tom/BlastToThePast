@@ -12,11 +12,15 @@ public class Player : MonoBehaviour
     // Movement and jump related variables
     public LayerMask groundLayer;
     bool isGrounded;
+    bool isJumping;
     Transform feetPos;
     float checkRadius = 0.5f;
     float movementSpeed = 5f;
     float jumpForce = 10f;
     float moveInput;
+    float jumpTimer;
+    float jumpDuration = 0.2f;
+
 
     // Aiming stuff
     Vector2 direction;
@@ -87,8 +91,27 @@ public class Player : MonoBehaviour
     void Move() {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         
-        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKeyDown(KeyCode.W) && isGrounded) {
+        if (isGrounded) {
+            rb.gravityScale = 5f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded) {
             rb.velocity = Vector2.up * jumpForce;
+            isJumping = true;
+            jumpTimer = jumpDuration;
+        }
+
+        if (Input.GetKey(KeyCode.W)) {
+            if (jumpTimer > 0) {
+                rb.velocity = Vector2.up * jumpForce;
+                jumpTimer-=Time.deltaTime;
+            } else {
+                isJumping = false;
+                rb.gravityScale = 8f;
+            }
+        } else {
+            isJumping = false;
+            rb.gravityScale = 8f;
         }
 
         rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
