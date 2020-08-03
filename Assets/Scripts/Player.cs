@@ -51,13 +51,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+        MoveAfterImage();
+
         RotateGun();
-        CheckInput();
-        Move();
+        
     }
     void FixedUpdate() {
-        MoveAfterImage();
+        CheckInput();
+        Move();
     }
 
     void CheckInput()
