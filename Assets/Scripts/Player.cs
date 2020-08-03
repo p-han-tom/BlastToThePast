@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         rb.gravityScale = (isGrounded) ? 5f : 8f;
 
         // Start the jump
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded) {
+        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKeyDown(KeyCode.W) && isGrounded) {
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
