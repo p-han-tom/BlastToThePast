@@ -11,6 +11,7 @@ public class FireBullets : MonoBehaviour
 
     public void FireBullet(Vector2 direction) {
         bullet = Instantiate(bulletPrefab, transform.Find("FirePoint").position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().AddForce(direction * 2000f);
+        Debug.Log(direction);
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * 25f;
     }
 }
