@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class BulletCollisionHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    Vector2 lastVelocity;
     void Update()
     {
-        
+        lastVelocity = GetComponent<Rigidbody2D>().velocity;
     }
 
     void OnCollisionEnter2D(Collision2D other) {
         // Check if other is mirror and reflect
+        if (other.gameObject.tag == "Mirror") {
+            Vector2 wallNormal = other.contacts[0].normal;
+            Vector2 newDirection = Vector2.Reflect(lastVelocity, wallNormal).normalized;
 
-        Destroy(gameObject);
+            GetComponent<Rigidbody2D>().velocity = newDirection*25f;
+        } else {
+            Destroy(gameObject);
+
+        }
     }
 }
