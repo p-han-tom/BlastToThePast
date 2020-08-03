@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8733335760554951404}
   - component: {fileID: 8733335760554951379}
   m_Layer: 0
-  m_Name: Bouncable Enemy
+  m_Name: Green Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
