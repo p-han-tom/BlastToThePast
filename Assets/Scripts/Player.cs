@@ -59,11 +59,10 @@ public class Player : MonoBehaviour
         if (clampedAngles.z > 180) clampedAngles.z -= 360;
         clampedAngles.z = Mathf.Clamp(clampedAngles.z, -100, 100);
         pivot.eulerAngles = clampedAngles;
-
+        CheckInput();
     }
 
     void FixedUpdate() {
-        CheckInput();
         Move();
     }
 
