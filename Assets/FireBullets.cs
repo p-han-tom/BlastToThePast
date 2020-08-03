@@ -16,7 +16,7 @@ public class FireBullets : MonoBehaviour
         lineRenderer = transform.root.Find("Line").GetComponent<LineRenderer>();
     }
     
-    public void FireBullet(Vector3 mousePos) {
+    public IEnumerator FireBullet(Vector3 mousePos) {
 
         if (!inWall) {
             lineRenderer.positionCount = 1;
@@ -37,7 +37,12 @@ public class FireBullets : MonoBehaviour
                     lineRenderer.SetPosition(lineRenderer.positionCount-1, direction * 100);
                 }
             }
+
+            lineRenderer.enabled = true;
+            yield return new WaitForSeconds(0.02f);
+            lineRenderer.enabled = false;
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D other) {
