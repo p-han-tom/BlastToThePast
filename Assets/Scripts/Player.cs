@@ -1,25 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool isAttacking;
-    bool isBeingAttacked = false;
+    // Attacking variables
+    bool isAttacking;
+    bool isBeingAttacked;
+
+    // Movement and jump related variables
+    public LayerMask groundLayer;
+    bool isGrounded;
+    Transform feetPos;
+    float checkRadius = 0.5f;
     float movementSpeed = 5f;
-    float attackCooldown;
-    float attackCooldownDuration = 0.3f;
-    int rewindIndex = 1;
+    float jumpForce = 10f;
+    float moveInput;
 
-
-    Vector2 movement;
+    // Aiming stuff
     Vector2 direction;
     Vector3 mousePos;
-    List<Vector3> rewindPositions = new List<Vector3>();
 
+    // Rewind ability
+    List<Vector3> rewindPositions = new List<Vector3>();
+    int rewindIndex = 1;
+
+    // Components
     Animator animator;
     Rigidbody2D rb;
 
+    // Prefabs
     public GameObject afterimagePrefab;
     GameObject afterimage;
 
@@ -28,6 +39,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         afterimage = Instantiate(afterimagePrefab, transform.position, Quaternion.identity);
+        feetPos = transform.Find("Feet");
     }
 
     void Update()
@@ -48,16 +60,12 @@ public class Player : MonoBehaviour
             }
             afterimage.transform.position = rewindPositions[rewindIndex];
         }
-        if (attackCooldown > 0f) {
-            attackCooldown -= Time.deltaTime;
-        }
 
-        CheckInput();
     }
 
     void FixedUpdate() {
-        if (isBeingAttacked) return;
-        Move(movement);
+        CheckInput();
+        Move();
     }
 
     void CheckInput() {
@@ -67,29 +75,26 @@ public class Player : MonoBehaviour
         direction.Normalize();
 
         // Check for movement and change animations accordingly
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        moveInput = Input.GetAxis("Horizontal");
         animator.SetBool("moving", (rb.velocity == Vector2.zero || isAttacking) ? false : true);
 
         // Listen for rewind key press
         if (Input.GetKeyDown(KeyCode.E)) {
             Rewind();
         }
-
-        if (Input.GetMouseButton(0) && attackCooldown <= 0f) {
-            BasicAttack();
-        }
-
     }
 
-    void Move(Vector2 movement) {
-        rb.velocity = movement * movementSpeed;
-
-        if (isAttacking) rb.velocity *= 0.5f;
-        else {
-            // Rotate entity while moving
-            if (rb.velocity.x != 0) transform.localRotation = (rb.velocity.x > 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+    void Move() {
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
+        
+        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKeyDown(KeyCode.W) && isGrounded) {
+            rb.velocity = Vector2.up * jumpForce;
         }
+
+        rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
+        // Rotate entity while moving
+        if (rb.velocity.x != 0) transform.localRotation = (rb.velocity.x > 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+        
     }
 
     void Rewind() {
@@ -100,24 +105,5 @@ public class Player : MonoBehaviour
         rewindPositions.Clear();
         afterimage.transform.position = transform.position;
         afterimage.GetComponent<Animator>().Rebind();
-    }
-
-    void BasicAttack() {
-        animator.SetTrigger("attack");
-        transform.localRotation = (mousePos.x >= transform.position.x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-    }
-
-    public IEnumerator MiniDash() {
-        isBeingAttacked = true;
-        rb.AddForce(direction * 8f, ForceMode2D.Impulse);
-        // Create Crescent
-
-        yield return new WaitForSeconds(0.05f);
-        isBeingAttacked = false;
-
-    }
-
-    public void goOnCooldown() {
-        attackCooldown = attackCooldownDuration;
     }
 }
