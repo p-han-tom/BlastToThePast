@@ -103,7 +103,8 @@ public class Player : MonoBehaviour
                 isJumping = false;
                 rb.gravityScale = 8f;
             }
-        } else if (Input.GetKeyUp(KeyCode.W)) {
+        }
+        if (Input.GetKeyUp(KeyCode.W)) {
             isJumping = false;
             rb.gravityScale = 8f;
         }
