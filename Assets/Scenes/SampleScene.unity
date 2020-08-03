@@ -446,33 +446,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 588580334, guid: d3579268cf649e54aa2fb4a648e7e160, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 588580334, guid: d3579268cf649e54aa2fb4a648e7e160, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 912014715, guid: d3579268cf649e54aa2fb4a648e7e160, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5441025114044346137, guid: d3579268cf649e54aa2fb4a648e7e160,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5441025114044346139, guid: d3579268cf649e54aa2fb4a648e7e160,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -6746702892038951374, guid: 9d0809752281e8844a4acfc8e009a395,
-        type: 3}
-    - target: {fileID: 5441025114044346139, guid: d3579268cf649e54aa2fb4a648e7e160,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5441025114044346212, guid: d3579268cf649e54aa2fb4a648e7e160,
         type: 3}
@@ -529,26 +506,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5441025114044346214, guid: d3579268cf649e54aa2fb4a648e7e160,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5441025114044346214, guid: d3579268cf649e54aa2fb4a648e7e160,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5441025114044346215, guid: d3579268cf649e54aa2fb4a648e7e160,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5441025114044346215, guid: d3579268cf649e54aa2fb4a648e7e160,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: dd068c352cd9cf0428bf880daee9df3b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3579268cf649e54aa2fb4a648e7e160, type: 3}
 --- !u!1 &1584101937
@@ -1028,21 +985,3 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1930261029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 588580333, guid: d3579268cf649e54aa2fb4a648e7e160,
-    type: 3}
-  m_PrefabInstance: {fileID: 1453064433}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1930261032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930261029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1c057da77cb2143974c849e8573082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

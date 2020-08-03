@@ -52,17 +52,8 @@ public class Player : MonoBehaviour
     void Update()
     {   
         MoveAfterImage();
-        pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1,1,1) : new Vector3(1,1,1);
-        pivot.up = direction;
-        
-        Vector3 clampedAngles = pivot.eulerAngles;
-        if (clampedAngles.z > 180) clampedAngles.z -= 360;
-        clampedAngles.z = Mathf.Clamp(clampedAngles.z, -100, 100);
-        pivot.eulerAngles = clampedAngles;
+        RotateGun();
         CheckInput();
-    }
-
-    void FixedUpdate() {
         Move();
     }
 
@@ -80,6 +71,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) {
             Rewind();
         }
+
+        // Listen for gun shot
+        if (Input.GetMouseButtonDown(0)) {
+            transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(direction);
+        }
     }
 
     void Move() {
@@ -88,7 +84,7 @@ public class Player : MonoBehaviour
         rb.gravityScale = (isGrounded) ? 5f : 8f;
 
         // Start the jump
-        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && isGrounded) {
+        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && isGrounded && !isJumping) {
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
@@ -142,5 +138,15 @@ public class Player : MonoBehaviour
             }
             afterimage.transform.position = rewindPositions[rewindIndex];
         }
+    }
+
+    void RotateGun() {
+        pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1,1,1) : new Vector3(1,1,1);
+        pivot.up = direction;
+        
+        Vector3 clampedAngles = pivot.eulerAngles;
+        if (clampedAngles.z > 180) clampedAngles.z -= 360;
+        clampedAngles.z = Mathf.Clamp(clampedAngles.z, -100, 100);
+        pivot.eulerAngles = clampedAngles;
     }
 }
