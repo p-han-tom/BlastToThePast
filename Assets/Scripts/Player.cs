@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     float jumpTimer;
     float jumpDuration = 0.2f;
 
-
     // Aiming stuff
     Vector2 direction;
     Vector3 mousePos;
@@ -38,17 +37,29 @@ public class Player : MonoBehaviour
     public GameObject afterimagePrefab;
     GameObject afterimage;
 
+    // Gun related
+    Transform pivot;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         afterimage = Instantiate(afterimagePrefab, transform.position, Quaternion.identity);
         feetPos = transform.Find("Feet");
+        pivot = transform.Find("Pivot");
     }
 
     void Update()
     {   
         MoveAfterImage();
+        pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1,1,1) : new Vector3(1,1,1);
+        pivot.up = direction;
+        
+        Vector3 clampedAngles = pivot.eulerAngles;
+        if (clampedAngles.z > 180) clampedAngles.z -= 360;
+        clampedAngles.z = Mathf.Clamp(clampedAngles.z, -100, 100);
+        pivot.eulerAngles = clampedAngles;
+
     }
 
     void FixedUpdate() {
@@ -73,18 +84,18 @@ public class Player : MonoBehaviour
     }
 
     void Move() {
+        // Set jump variables
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
-        
-        if (isGrounded) {
-            rb.gravityScale = 5f;
-        }
+        rb.gravityScale = (isGrounded) ? 5f : 8f;
 
+        // Start the jump
         if (Input.GetKeyDown(KeyCode.W) && isGrounded) {
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
         }
 
+        // Jump higher while key is pressed
         if (Input.GetKey(KeyCode.W) && isJumping) {
             if (jumpTimer > 0) {
                 rb.velocity = Vector2.up * jumpForce;
@@ -93,7 +104,7 @@ public class Player : MonoBehaviour
                 isJumping = false;
                 rb.gravityScale = 8f;
             }
-        } else {
+        } else if (Input.GetKeyUp(KeyCode.W)) {
             isJumping = false;
             rb.gravityScale = 8f;
         }
