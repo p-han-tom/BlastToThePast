@@ -28,16 +28,15 @@ public class FireBullets : MonoBehaviour
             
             for (int i = 0; i < reflections; i ++) {
                 if (rayInfo) {
+                    lineRenderer.positionCount++;
+                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayInfo.point);
                     if (rayInfo.transform.CompareTag("Mirror")) {
-                        lineRenderer.positionCount++;
-                        lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayInfo.point);
                         direction = Vector2.Reflect(direction,rayInfo.normal);
                         rayInfo = Physics2D.Raycast(new Vector2(rayInfo.point.x + rayInfo.normal.x, rayInfo.point.y + rayInfo.normal.y), direction);
                     } else if (rayInfo.transform.CompareTag("Enemy")) {
                         rayInfo.transform.GetComponent<greenEnemyControl>().Rewind();
                         break;
-                    }
-                    
+                    } 
                 } else {
                     lineRenderer.positionCount ++;
                     lineRenderer.SetPosition(lineRenderer.positionCount-1, direction * 100);
