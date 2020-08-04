@@ -29,7 +29,7 @@ public class FireBullets : MonoBehaviour
             RaycastHit2D rayInfo = Physics2D.Raycast(firepoint.position, direction);
             
             for (int i = 0; i < reflections; i ++) {
-                if (rayInfo) {
+                if (rayInfo && !rayInfo.transform.CompareTag("Player")) {
                     lineRenderer.positionCount++;
                     lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayInfo.point);
                     Instantiate(particlesPrefab, rayInfo.point, Quaternion.identity);
