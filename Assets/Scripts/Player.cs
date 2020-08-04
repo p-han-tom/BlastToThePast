@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         afterimage = Instantiate(afterimagePrefab, transform.position, Quaternion.identity);
+        afterimage.GetComponent<Animator>().runtimeAnimatorController = GetComponent<Animator>().runtimeAnimatorController;
         feetPos = transform.Find("Feet");
         pivot = transform.Find("Pivot");
     }
@@ -52,7 +53,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         MoveAfterImage();
-
         RotateGun();
         
     }
@@ -177,6 +177,7 @@ public class Player : MonoBehaviour
         jumpTimer = jumpDuration;
     }
     public void die() {
+
         Debug.Log("AHHHHHHHHHHHHHHH FUCK");
     }
     public void win() {
