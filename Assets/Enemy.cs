@@ -31,13 +31,12 @@ public class Enemy : Rewinder
         newColor.a = 0.75f;
         afterimage.GetComponent<SpriteRenderer>().color = newColor;
         GetComponent<Animator>().SetBool("moving", true);
-        // afterimage.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.y >= 0)
+        if (rb.velocity.y >= 0.1f)
         {
             lookAhead();
             rb.velocity = new Vector2(speed * direction, rb.velocity.y);
