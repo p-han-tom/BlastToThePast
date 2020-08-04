@@ -36,7 +36,7 @@ public class Enemy : Rewinder
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.y >= 0.1f)
+        if (rb.velocity.y <= 0.1f)
         {
             lookAhead();
             rb.velocity = new Vector2(speed * direction, rb.velocity.y);
