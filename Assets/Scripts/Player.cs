@@ -20,6 +20,8 @@ public class Player : Rewinder
     float moveInput;
     float jumpTimer;
     float jumpDuration = 0.2f;
+    int orbCount = 0;
+    PortalControl portal;
 
     // Aiming stuff
     Vector2 direction;
@@ -40,6 +42,7 @@ public class Player : Rewinder
         afterimage.GetComponent<Animator>().runtimeAnimatorController = GetComponent<Animator>().runtimeAnimatorController;
         feetPos = transform.Find("Feet");
         pivot = transform.Find("Pivot");
+        portal = GameObject.Find("Portal").GetComponent<PortalControl>();
     }
 
     void Update()
@@ -142,4 +145,10 @@ public class Player : Rewinder
     {
         Debug.Log("dub");
     }
+    public void gainOrb()
+    {
+        orbCount++;
+        if (orbCount >= portal.orbsRequired) portal.ActivatePortal();
+    }
+    public int getOrbCount() { return orbCount; }
 }
