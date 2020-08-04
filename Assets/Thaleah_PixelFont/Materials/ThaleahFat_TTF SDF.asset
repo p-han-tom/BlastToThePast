@@ -2424,7 +2424,11 @@ Material:
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333
     - _ScaleRatioB: 0.6770833
+<<<<<<< HEAD
     - _ScaleRatioC: 0.2832985
+=======
+    - _ScaleRatioC: 0.6770833
+>>>>>>> 7f679a8db224250b7e9bbc74328827290b9dfba8
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
