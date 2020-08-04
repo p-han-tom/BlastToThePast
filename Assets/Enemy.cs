@@ -9,17 +9,17 @@ public class Enemy : Rewinder
     public LayerMask groundLayer;
     public LayerMask playerLayer;
     public bool spiked = false;
+    public bool walksOffLedges = false;
 
     // Movement variables
     private Transform feetPos;
     private Transform lookAheadGroundPos;
     private Transform lookAheadWallPos;
     private float speed = 2f;
-    private int direction = 1;
+    public int direction = 1;
 
     // Components
     private Rigidbody2D rb;
-
     void Start()
     {
         feetPos = transform.Find("Feet");
@@ -32,11 +32,14 @@ public class Enemy : Rewinder
         newColor.a = 0.75f;
         afterimage.GetComponent<SpriteRenderer>().color = newColor;
         GetComponent<Animator>().SetBool("moving", true);
+        transform.localRotation = (direction < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+        afterimage.transform.localRotation = transform.localRotation = (direction < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Physics2D.IgnoreLayerCollision(9, 9);
         if (Math.Abs(rb.velocity.y) <= 0.01f)
         {
             lookAhead();
@@ -50,7 +53,7 @@ public class Enemy : Rewinder
 
     void lookAhead()
     {
-        if (!Physics2D.OverlapCircle(lookAheadGroundPos.position, 0.2f, groundLayer))
+        if (!Physics2D.OverlapCircle(lookAheadGroundPos.position, 0.2f, groundLayer) && walksOffLedges == false)
         {
             turnAround();
         }
