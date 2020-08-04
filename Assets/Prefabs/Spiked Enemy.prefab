@@ -123,7 +123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   spiked: 1
-  walksOffLedges: 0
+  walksOffLedges: 1
   direction: 1
 --- !u!212 &5667144242748368603
 SpriteRenderer:

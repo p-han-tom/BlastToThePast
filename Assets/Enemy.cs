@@ -57,7 +57,7 @@ public class Enemy : Rewinder
         {
             turnAround();
         }
-        if (Physics2D.OverlapCircle(lookAheadWallPos.position, 0.2f, groundLayer))
+        if (Physics2D.OverlapCircle(lookAheadWallPos.position, 0.1f, groundLayer))
         {
             turnAround();
         }
