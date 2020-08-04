@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8733335760554951405}
   - component: {fileID: 8733335760554951404}
   - component: {fileID: 8733335760554951379}
-  - component: {fileID: 243512596}
+  - component: {fileID: 832664130}
   m_Layer: 0
   m_Name: Green Enemy
   m_TagString: Enemy
@@ -172,14 +172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2600fa846494fce4abbde3eff1aa3529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  afterimagePrefab: {fileID: 2586550513568630861, guid: 7710e07e45a1cb74d9f6c7a74094571c,
+    type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
-  afterimagePrefab: {fileID: 2586550513568630861, guid: 7710e07e45a1cb74d9f6c7a74094571c,
-    type: 3}
 --- !u!212 &8733335760554951377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.875}
   m_EdgeRadius: 0
---- !u!96 &243512596
+--- !u!96 &832664130
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0

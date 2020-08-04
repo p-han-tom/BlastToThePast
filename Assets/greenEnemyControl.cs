@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class greenEnemyControl : Rewinder
+public class greenEnemyControl : Enemy
 {
     // LayerMasks
     public LayerMask groundLayer;
@@ -12,7 +12,6 @@ public class greenEnemyControl : Rewinder
     private Transform feetPos;
     private Transform lookAheadGroundPos;
     private Transform lookAheadWallPos;
-    private int direction = 1;
     private float speed = 2f;
 
     // Components

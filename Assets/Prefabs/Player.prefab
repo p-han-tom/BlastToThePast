@@ -494,7 +494,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -6746702892038951374, guid: 9d0809752281e8844a4acfc8e009a395,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.5, y: 1.5}
@@ -515,11 +515,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611e768f60f2aa34e9e2364af5747dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  afterimagePrefab: {fileID: 2586550513568630861, guid: 7710e07e45a1cb74d9f6c7a74094571c,
+    type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  afterimagePrefab: {fileID: 2586550513568630861, guid: 7710e07e45a1cb74d9f6c7a74094571c,
-    type: 3}
 --- !u!95 &5441025114044346213
 Animator:
   serializedVersion: 3
