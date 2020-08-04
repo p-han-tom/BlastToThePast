@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Enemy : Rewinder
@@ -36,7 +37,7 @@ public class Enemy : Rewinder
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.y <= 0.1f)
+        if (Math.Abs(rb.velocity.y) <= 0.01f)
         {
             lookAhead();
             rb.velocity = new Vector2(speed * direction, rb.velocity.y);
