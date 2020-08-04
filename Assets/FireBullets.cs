@@ -34,7 +34,7 @@ public class FireBullets : MonoBehaviour
                         direction = Vector2.Reflect(direction,rayInfo.normal);
                         rayInfo = Physics2D.Raycast(new Vector2(rayInfo.point.x + rayInfo.normal.x, rayInfo.point.y + rayInfo.normal.y), direction);
                     } else if (rayInfo.transform.CompareTag("Enemy")) {
-                        rayInfo.transform.GetComponent<greenEnemyControl>().Rewind();
+                        rayInfo.transform.GetComponent<enemyControl>().Rewind();
                         break;
                     } 
                 } else {

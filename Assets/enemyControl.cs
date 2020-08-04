@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class greenEnemyControl : Enemy
+public class enemyControl : Enemy
 {
     // LayerMasks
     public LayerMask groundLayer;
     public LayerMask playerLayer;
+    public bool spiked = false;
 
     // Movement variables
     private Transform feetPos;
@@ -16,9 +17,6 @@ public class greenEnemyControl : Enemy
 
     // Components
     private Rigidbody2D rb;
-
-    
-
     void Start()
     {
         feetPos = transform.Find("Feet");
@@ -35,9 +33,11 @@ public class greenEnemyControl : Enemy
     // Update is called once per frame
     void Update()
     {
-        MoveAfterImage();
         lookAhead();
         rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+    }
+    void FixedUpdate() {
+        MoveAfterImage();
     }
 
     void lookAhead()
@@ -58,7 +58,8 @@ public class greenEnemyControl : Enemy
         transform.localRotation = (direction < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnCollisionEnter2D(Collision2D other)
+    {
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<Player>().die();
@@ -67,15 +68,17 @@ public class greenEnemyControl : Enemy
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "PlayerHurtBox")
+        if (other.gameObject.tag == "PlayerHurtBox" && spiked == false)
         {
             other.gameObject.transform.parent.GetComponent<Player>().bounce();
             die();
         }
     }
-
-   
-    public void die() {
+    public bool isSpiked() {
+        return spiked;
+    }
+    public void die()
+    {
         Destroy(afterimage);
         Destroy(gameObject);
     }

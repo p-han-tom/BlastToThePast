@@ -44,12 +44,12 @@ public class Player : Rewinder
 
     void Update()
     {
-        MoveAfterImage();
         RotateGun();
-        
     }
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         CheckInput();
+        MoveAfterImage();
         Move();
     }
 
@@ -133,11 +133,13 @@ public class Player : Rewinder
         isJumping = true;
         jumpTimer = jumpDuration;
     }
-    public void die() {
+    public void die()
+    {
 
         Debug.Log("AHHHHHHHHHHHHHHH FUCK");
     }
-    public void win() {
+    public void win()
+    {
         Debug.Log("dub");
     }
 }
