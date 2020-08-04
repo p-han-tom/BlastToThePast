@@ -56,7 +56,7 @@ public class greenEnemyControl : Rewinder
     public void turnAround()
     {
         direction *= -1;
-        transform.eulerAngles = (direction < 0) ? new Vector3(0, 180, 0) : new Vector3(0, 0, 0);
+        transform.localRotation = (direction < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
     }
 
     void OnCollisionEnter2D(Collision2D other) {

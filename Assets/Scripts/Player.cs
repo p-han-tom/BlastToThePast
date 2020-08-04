@@ -113,7 +113,7 @@ public class Player : Rewinder
 
         rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
         // Rotate entity while moving
-        if (rb.velocity.x != 0) transform.localRotation = (rb.velocity.x > 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+        if (rb.velocity.x != 0) transform.localRotation = (rb.velocity.x < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
 
     }
 

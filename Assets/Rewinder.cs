@@ -25,7 +25,7 @@ public class Rewinder : MonoBehaviour
             if (rewindPositions[rewindIndex].x != rewindPositions[rewindIndex - 2].x || rewindPositions[rewindIndex].y != rewindPositions[rewindIndex - 2].y)
             {
                 afterimage.GetComponent<Animator>().SetBool("moving", true);
-                afterimage.transform.localRotation = (rewindPositions[rewindIndex].x > rewindPositions[rewindIndex - 2].x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+                afterimage.transform.localRotation = (rewindPositions[rewindIndex].x < rewindPositions[rewindIndex - 2].x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
             }
             else
             {
@@ -45,6 +45,15 @@ public class Rewinder : MonoBehaviour
         rewindPositions.Clear();
         afterimage.transform.position = transform.position;
         afterimage.GetComponent<Animator>().Rebind();
+
+        if (gameObject.CompareTag("Enemy")) {
+            if (afterimage.transform.localRotation.y != transform.localRotation.y) {
+                Debug.Log(afterimage.transform.localRotation + " " + transform.localRotation);
+                float newVelocityX = GetComponent<Rigidbody2D>().velocity.x * -1;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(newVelocityX, GetComponent<Rigidbody2D>().velocity.y);
+                transform.localRotation = (transform.localRotation == Quaternion.Euler(0,0,0)) ? Quaternion.Euler(0,180,0) : Quaternion.Euler(0,0,0);
+            }
+        }
     }
 
 }
