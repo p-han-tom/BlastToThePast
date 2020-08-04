@@ -18,7 +18,7 @@ public class Enemy : Rewinder
 
     // Components
     private Rigidbody2D rb;
-    
+
     void Start()
     {
         feetPos = transform.Find("Feet");
@@ -37,10 +37,14 @@ public class Enemy : Rewinder
     // Update is called once per frame
     void Update()
     {
-        lookAhead();
-        rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+        if (rb.velocity.y >= 0)
+        {
+            lookAhead();
+            rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+        }
     }
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         MoveAfterImage();
     }
 
@@ -78,7 +82,8 @@ public class Enemy : Rewinder
             die();
         }
     }
-    public bool isSpiked() {
+    public bool isSpiked()
+    {
         return spiked;
     }
     public void die()
@@ -86,12 +91,15 @@ public class Enemy : Rewinder
         Destroy(afterimage);
         Destroy(gameObject);
     }
-    public override void Rewind() {
+    public override void Rewind()
+    {
         base.Rewind();
-        if (gameObject.CompareTag("Enemy")) {
-            if (afterimage.transform.eulerAngles.y != transform.eulerAngles.y) {
-                direction*=-1;
-                transform.localRotation = (transform.localRotation == Quaternion.Euler(0,0,0)) ? Quaternion.Euler(0,180,0) : Quaternion.Euler(0,0,0);
+        if (gameObject.CompareTag("Enemy"))
+        {
+            if (afterimage.transform.eulerAngles.y != transform.eulerAngles.y)
+            {
+                direction *= -1;
+                transform.localRotation = (transform.localRotation == Quaternion.Euler(0, 0, 0)) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
             }
         }
     }
