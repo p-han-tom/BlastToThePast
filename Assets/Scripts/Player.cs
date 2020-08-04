@@ -44,11 +44,11 @@ public class Player : Rewinder
 
     void Update()
     {
+        CheckInput();
         RotateGun();
     }
     void FixedUpdate()
     {
-        CheckInput();
         MoveAfterImage();
         Move();
     }
