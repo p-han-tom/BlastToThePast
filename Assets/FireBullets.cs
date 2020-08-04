@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FireBullets : MonoBehaviour
 {
-
     public int reflections;
     LineRenderer lineRenderer;
     RaycastHit2D hit2D;
     bool inWall;
     Transform firepoint;
+
+    public GameObject particlesPrefab;
 
     void Start() {
         firepoint = transform.Find("FirePoint");
@@ -21,6 +22,7 @@ public class FireBullets : MonoBehaviour
         if (!inWall) {
             lineRenderer.positionCount = 1;
             lineRenderer.SetPosition(0, firepoint.position);
+            StartCoroutine(Camera.main.GetComponent<CameraControl>().cameraShake(0.05f,0.2f));
             
 
             Vector3 direction = new Vector3(mousePos.x - firepoint.position.x, mousePos.y - firepoint.position.y, 0);
@@ -30,9 +32,12 @@ public class FireBullets : MonoBehaviour
                 if (rayInfo) {
                     lineRenderer.positionCount++;
                     lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayInfo.point);
-                    if (rayInfo.transform.CompareTag("Mirror")) {
+                    Instantiate(particlesPrefab, rayInfo.point, Quaternion.identity);
+
+                    if (rayInfo.transform.CompareTag("Mirror")) {    
                         direction = Vector2.Reflect(direction,rayInfo.normal);
                         rayInfo = Physics2D.Raycast(new Vector2(rayInfo.point.x + rayInfo.normal.x, rayInfo.point.y + rayInfo.normal.y), direction);
+
                     } else if (rayInfo.transform.CompareTag("Enemy")) {
                         rayInfo.transform.GetComponent<Enemy>().Rewind();
                         break;

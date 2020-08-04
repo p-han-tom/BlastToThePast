@@ -12,6 +12,8 @@ public class Rewinder : MonoBehaviour
     public GameObject afterimagePrefab;
     protected GameObject afterimage;
 
+    public GameObject particlesPrefab;
+
     protected void MoveAfterImage()
     {
         rewindPositions.Add(transform.position);
@@ -44,6 +46,7 @@ public class Rewinder : MonoBehaviour
         rewindIndex = 1;
         rewindPositions.Clear();
         afterimage.transform.position = transform.position;
+        Instantiate(particlesPrefab, transform.position, Quaternion.identity);
         afterimage.GetComponent<Animator>().Rebind();
 
         

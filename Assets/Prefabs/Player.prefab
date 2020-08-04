@@ -75,7 +75,7 @@ LineRenderer:
   - {x: 2, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.1659943
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -88,13 +88,22 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.9951439
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 1, b: 0.8971636, a: 0.09019608}
+      key1: {r: 0, g: 1, b: 0.8971636, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -110,7 +119,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 45104
       atime2: 0
       atime3: 0
       atime4: 0
@@ -121,7 +130,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 90
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
@@ -225,6 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reflections: 3
+  particlesPrefab: {fileID: 2611752705979995834, guid: 0baeac80ecac65749a0c24a4e454a291,
+    type: 3}
 --- !u!61 &1685015677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -517,6 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   afterimagePrefab: {fileID: 2586550513568630861, guid: 7710e07e45a1cb74d9f6c7a74094571c,
     type: 3}
+  particlesPrefab: {fileID: 2611752705979995834, guid: 0baeac80ecac65749a0c24a4e454a291,
+    type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -626,7 +639,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 2.4
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

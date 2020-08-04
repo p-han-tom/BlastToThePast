@@ -114,6 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   afterimagePrefab: {fileID: 2586550513568630861, guid: 7710e07e45a1cb74d9f6c7a74094571c,
     type: 3}
+  particlesPrefab: {fileID: 2611752705979995834, guid: 0baeac80ecac65749a0c24a4e454a291,
+    type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -278,7 +280,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 2.4
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -308,7 +310,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 1, b: 0.16215563, a: 0.58431375}
+      key0: {r: 1, g: 0.06987041, b: 0, a: 0.58431375}
       key1: {r: 1, g: 1, b: 1, a: 0.41568628}
       key2: {r: 0.4056604, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
