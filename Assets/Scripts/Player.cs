@@ -65,7 +65,6 @@ public class Player : Rewinder
 
         // Check for movement and change animations accordingly
         moveInput = Input.GetAxisRaw("Horizontal");
-        animator.SetBool("moving", (rb.velocity == Vector2.zero || isAttacking) ? false : true);
 
         // Listen for rewind key press
         if (Input.GetKeyDown(KeyCode.E))
@@ -85,6 +84,14 @@ public class Player : Rewinder
         // Set jump variables
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         rb.gravityScale = (isGrounded) ? 5f : 8f;
+
+        if (isGrounded) 
+            animator.SetFloat("yVelocity", 0);
+        else 
+            animator.SetFloat("yVelocity", rb.velocity.y);
+        
+        animator.SetBool("moving", (rb.velocity == Vector2.zero || !isGrounded) ? false : true);
+
 
         // Start the jump
         if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && isGrounded && !isJumping)
