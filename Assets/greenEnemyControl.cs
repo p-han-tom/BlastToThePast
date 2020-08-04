@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class greenEnemyControl : MonoBehaviour
+public class greenEnemyControl : Rewinder
 {
     // LayerMasks
     public LayerMask groundLayer;
@@ -18,13 +18,7 @@ public class greenEnemyControl : MonoBehaviour
     // Components
     private Rigidbody2D rb;
 
-    // Rewind variables
-    List<Vector3> rewindPositions = new List<Vector3>();
-    int rewindIndex = 1;
-
-    // Prefabs
-    public GameObject afterimagePrefab;
-    GameObject afterimage;
+    
 
     void Start()
     {
@@ -35,6 +29,7 @@ public class greenEnemyControl : MonoBehaviour
         afterimage = Instantiate(afterimagePrefab, transform.position, Quaternion.identity);
         afterimage.GetComponent<Animator>().runtimeAnimatorController = GetComponent<Animator>().runtimeAnimatorController;
         afterimage.GetComponent<SpriteRenderer>().color = new Color(10, 196, 60, 0.75f);
+        GetComponent<Animator>().SetBool("moving", true);
         // afterimage.GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -80,28 +75,7 @@ public class greenEnemyControl : MonoBehaviour
         }
     }
 
-    void MoveAfterImage()
-    {
-        rewindPositions.Add(transform.position);
-
-        // After 2 seconds, an afterimage will start tracking the player's previous position
-        if (rewindPositions.Count > 120)
-        {
-            rewindIndex++;
-
-            // Change animations for if player is moving or idle and rotate player
-            if (rewindPositions[rewindIndex].x != rewindPositions[rewindIndex - 2].x || rewindPositions[rewindIndex].y != rewindPositions[rewindIndex - 2].y)
-            {
-                afterimage.transform.localRotation = (rewindPositions[rewindIndex].x > rewindPositions[rewindIndex - 2].x) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                if (transform.position == afterimage.transform.position) afterimage.transform.localRotation = transform.localRotation;
-            }
-            afterimage.transform.position = rewindPositions[rewindIndex];
-        }
-    }
-
+   
     public void die() {
         Destroy(afterimage);
         Destroy(gameObject);
