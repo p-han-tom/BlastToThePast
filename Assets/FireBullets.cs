@@ -10,14 +10,19 @@ public class FireBullets : MonoBehaviour
     bool inWall;
     Transform firepoint;
 
+    HUDControl hud;
+
     public GameObject particlesPrefab;
 
     void Start() {
         firepoint = transform.Find("FirePoint");
         lineRenderer = transform.root.Find("Line").GetComponent<LineRenderer>();
+        hud = GameObject.Find("HUD").GetComponent<HUDControl>();
     }
     
     public IEnumerator FireBullet(Vector3 mousePos) {
+
+        hud.IncreaseShotsFired();
 
         if (!inWall) {
             lineRenderer.positionCount = 1;
