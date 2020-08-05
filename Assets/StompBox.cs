@@ -16,7 +16,7 @@ public class StompBox : MonoBehaviour
     }
     void Update()
     {
-        if (player.getIsGrounded() == false && rb.velocity.y <= 0.1f)
+        if (player.getIsGrounded() == false)
         {
             col.enabled = true;
         }
