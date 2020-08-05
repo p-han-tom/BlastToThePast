@@ -9,12 +9,14 @@ public class FireBullets : MonoBehaviour
     RaycastHit2D hit2D;
     bool inWall;
     Transform firepoint;
+    AudioManager audioManager;
 
     public GameObject particlesPrefab;
 
     void Start() {
         firepoint = transform.Find("FirePoint");
         lineRenderer = transform.root.Find("Line").GetComponent<LineRenderer>();
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
     
     public IEnumerator FireBullet(Vector3 mousePos) {
@@ -39,6 +41,7 @@ public class FireBullets : MonoBehaviour
                         rayInfo = Physics2D.Raycast(new Vector2(rayInfo.point.x + rayInfo.normal.x, rayInfo.point.y + rayInfo.normal.y), direction);
 
                     } else if (rayInfo.transform.CompareTag("Enemy")) {
+                        audioManager.Play("Rewind");
                         rayInfo.transform.GetComponent<Enemy>().Rewind();
                         break;
                     } 

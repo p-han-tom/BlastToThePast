@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 5441025114044346215}
   - component: {fileID: 5441025114044346214}
   - component: {fileID: 1783115973}
+  - component: {fileID: 8932698399503360068}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -709,3 +710,15 @@ TrailRenderer:
   m_MinVertexDistance: 0.01
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &8932698399503360068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441025114044346137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f744479ba62f25f4a9ea260f40d99887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

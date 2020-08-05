@@ -20,11 +20,13 @@ public class Enemy : Rewinder
 
     // Components
     private Rigidbody2D rb;
+    private AudioManager audioManager;
     void Start()
     {
         feetPos = transform.Find("Feet");
         lookAheadGroundPos = transform.Find("LookAheadGround");
         lookAheadWallPos = transform.Find("LookAheadWall");
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         rb = GetComponent<Rigidbody2D>();
         afterimage = Instantiate(afterimagePrefab, transform.position, Quaternion.identity);
         afterimage.GetComponent<Animator>().runtimeAnimatorController = GetComponent<Animator>().runtimeAnimatorController;
@@ -97,6 +99,7 @@ public class Enemy : Rewinder
     }
     public void die()
     {
+        audioManager.Play("Death");
         Destroy(afterimage);
         Destroy(gameObject);
     }

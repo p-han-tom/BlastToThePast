@@ -16,7 +16,7 @@ public class Player : Rewinder
     bool isGrounded;
     bool isJumping;
     Transform feetPos;
-    float checkRadius = 0.025f;
+    float checkRadius = 0.1f;
     float movementSpeed = 5f;
     float jumpForce = 10f;
     float moveInput;
@@ -35,6 +35,7 @@ public class Player : Rewinder
 
     // Gun related
     Transform pivot;
+    AudioManager audioManager;
 
     // Prefabs
     public GameObject jumpParticlePrefab;
@@ -49,6 +50,7 @@ public class Player : Rewinder
         feetPos = transform.Find("Feet");
         pivot = transform.Find("Pivot");
         portal = GameObject.Find("Portal").GetComponent<PortalControl>();
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -79,12 +81,14 @@ public class Player : Rewinder
             // Listen for rewind key press
             if (Input.GetKeyDown(KeyCode.E))
             {
+                audioManager.Play("Rewind");
                 Rewind();
             }
 
             // Listen for gun shot
             if (Input.GetMouseButtonDown(0))
             {
+                audioManager.Play("FireLaser");
                 StartCoroutine(transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(mousePos));
             }
         }
@@ -112,6 +116,7 @@ public class Player : Rewinder
         // Start the jump
         if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && isGrounded && !isJumping)
         {
+            audioManager.Play("Jump");
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
@@ -162,6 +167,7 @@ public class Player : Rewinder
     }
     public void Die()
     {
+        audioManager.Play("PlayerDeath");
         Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         // Prompt restart
         Destroy(afterimage);
@@ -169,6 +175,7 @@ public class Player : Rewinder
     }
     public void EnterPortalWin(Vector2 portalPos)
     {
+        audioManager.Play("EnterPortal");
         Destroy(afterimage);
         notSuckedUpByPortal = false;
         GetComponent<Collider2D>().enabled = false;
