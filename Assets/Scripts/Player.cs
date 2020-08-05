@@ -36,6 +36,7 @@ public class Player : Rewinder
 
     // Prefabs
     public GameObject jumpParticlePrefab;
+    public GameObject deathParticlePrefab;
 
     void Start()
     {
@@ -149,9 +150,12 @@ public class Player : Rewinder
     }
     public void Die()
     {
-        // Instantiate death particles
-        // Destroy(gameObject);
+        Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         // Prompt restart
+
+
+        Destroy(afterimage);
+        Destroy(gameObject);
     }
     public void win()
     {
