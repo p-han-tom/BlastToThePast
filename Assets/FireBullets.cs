@@ -56,12 +56,13 @@ public class FireBullets : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        inWall = true;
+        if (other.gameObject.layer == 8)
+            inWall = true;
         
     }
 
     void OnTriggerExit2D(Collider2D other) {
+    if (other.gameObject.layer == 8)
         inWall = false;
-        
     }
 }
