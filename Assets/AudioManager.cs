@@ -41,4 +41,8 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+    public Sound Find(string name)
+    {
+        return Array.Find(sounds, sound => sound.name == name);
+    }
 }

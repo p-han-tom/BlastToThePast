@@ -36,6 +36,7 @@ public class PortalControl : MonoBehaviour
     }
     public void ActivatePortal() {
         Destroy(inactivePortalParticles);
+        GameObject.Find("Audio Manager").GetComponent<AudioManager>().Play("PortalOpen");
         active = true;
         rotateSpeedCurrent = rotateSpeedActive;
         sr.sprite = activeSprite;
