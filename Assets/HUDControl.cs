@@ -7,21 +7,21 @@ using TMPro;
 using UnityEngine.SceneManagement;
 public class HUDControl : MonoBehaviour
 {
-    private int shotsFiredCount;
-    private TextMeshProUGUI shotsFiredDisplay;
+    private int rewinds;
+    private TextMeshProUGUI rewindsDisplay;
 
     private float timer;
     private TextMeshProUGUI timerDisplay;
 
     void Start()
     {
-        shotsFiredDisplay = transform.Find("Shots Fired").GetComponent<TextMeshProUGUI>();
+        rewindsDisplay = transform.Find("Rewinds").GetComponent<TextMeshProUGUI>();
         timerDisplay = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
     }
 
-    public void IncreaseShotsFired() {
-        shotsFiredCount ++;
-        shotsFiredDisplay.text = "Shots Fired: " + shotsFiredCount;
+    public void IncreaseRewinds() {
+        rewinds ++;
+        rewindsDisplay.text = "Rewinds: " + rewinds;
     } 
 
     void UpdateTimer() {

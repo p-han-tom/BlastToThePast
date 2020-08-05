@@ -40,6 +40,7 @@ public class Rewinder : MonoBehaviour
 
     public virtual void Rewind()
     {
+        GameObject.Find("HUD").GetComponent<HUDControl>().IncreaseRewinds();
         transform.position = rewindPositions[rewindIndex];
 
         // Reset rewind variables and teleport afterimage back to player
