@@ -92,4 +92,16 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Orb
+    clip: {fileID: 8300000, guid: 6972b971ab4ddc6489ac43afdc29bf31, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PortalOpen
+    clip: {fileID: 8300000, guid: 48bf58dc6b171a24094f2d3c4f90a40a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   isGameAM: 1

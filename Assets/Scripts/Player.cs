@@ -51,6 +51,7 @@ public class Player : Rewinder
         pivot = transform.Find("Pivot");
         portal = GameObject.Find("Portal").GetComponent<PortalControl>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        audioManager.Find("Orb").source.pitch = 1f;
     }
 
     void Update()
@@ -200,6 +201,8 @@ public class Player : Rewinder
     }
     public void gainOrb()
     {
+        audioManager.Play("Orb");
+        audioManager.Find("Orb").source.pitch+=0.1f;
         orbCount++;
         if (orbCount >= portal.orbsRequired) portal.ActivatePortal();
     }
