@@ -149,8 +149,9 @@ public class Player : Rewinder
     }
     public void Die()
     {
-
-        Debug.Log("AHHHHHHHHHHHHHHH FUCK");
+        // Instantiate death particles
+        // Destroy(gameObject);
+        // Prompt restart
     }
     public void win()
     {

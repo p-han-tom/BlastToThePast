@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 104392132}
   m_Layer: 2
   m_Name: Line
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +307,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.044472456, y: -0.51853585}
+  m_Offset: {x: 0.03481126, y: -0.51853585}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -318,7 +318,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.31834126, y: 0.14809895}
+  m_Size: {x: 0.47292042, y: 0.14809895}
   m_EdgeRadius: 0
 --- !u!114 &706987961
 MonoBehaviour:
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 912014715}
   m_Layer: 2
   m_Name: Pivot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 1011738113}
   m_Layer: 2
   m_Name: Feet
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
