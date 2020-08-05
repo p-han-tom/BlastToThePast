@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Rewinder
 {
@@ -81,6 +82,11 @@ public class Player : Rewinder
         {
             StartCoroutine(transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(mousePos));
         }
+
+        // Listen for restart
+        if(Input.GetKeyDown(KeyCode.R)){
+             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+         }
     }
 
     void Move()
