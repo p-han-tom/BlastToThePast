@@ -212,7 +212,7 @@ public class Player : Rewinder
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-
+            audioManager.Play("PlayerLand");
             Instantiate(jumpParticlePrefab, transform.position, Quaternion.identity);
         }
     }
