@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 1909229152307084103}
   - component: {fileID: 1909229152307084102}
   m_Layer: 5
-  m_Name: Shots Fired
+  m_Name: Rewinds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Shots Fired: '
+  m_text: 'Rewinds: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 59bb0761fda8df542ac0071f3b53863d, type: 2}
   m_sharedMaterial: {fileID: 9167864671827948844, guid: 59bb0761fda8df542ac0071f3b53863d,
@@ -404,9 +404,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1909229152307084102}
-    characterCount: 13
+    characterCount: 10
     spriteCount: 0
-    spaceCount: 2
+    spaceCount: 1
     wordCount: 2
     linkCount: 0
     lineCount: 1
