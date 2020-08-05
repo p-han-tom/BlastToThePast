@@ -307,7 +307,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02823767, y: -0.5350201}
+  m_Offset: {x: 0.02000001, y: -0.53243804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -318,7 +318,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7164753, y: 0.22004032}
+  m_Size: {x: 0.7, y: 0.21487617}
   m_EdgeRadius: 0
 --- !u!114 &706987961
 MonoBehaviour:
@@ -601,7 +601,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.62, y: 0.85}
+  m_Size: {x: 0.5, y: 0.87}
   m_EdgeRadius: 0
 --- !u!96 &1783115973
 TrailRenderer:
