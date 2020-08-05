@@ -81,6 +81,7 @@ public class Enemy : Rewinder
     {
         if (other.gameObject.tag == "PlayerHurtBox" && spiked == false)
         {
+            Physics2D.IgnoreCollision(other, GetComponent<BoxCollider2D>());
             other.gameObject.transform.parent.GetComponent<Player>().bounce();
             die();
         }
