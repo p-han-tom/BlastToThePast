@@ -10883,7 +10883,7 @@ PrefabInstance:
     - target: {fileID: 7859220084717123053, guid: 442174b481bf09f4680d2d3b66b14e65,
         type: 3}
       propertyPath: orbsRequired
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 442174b481bf09f4680d2d3b66b14e65, type: 3}
