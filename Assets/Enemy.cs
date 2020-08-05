@@ -73,7 +73,7 @@ public class Enemy : Rewinder
     {
         if (other.gameObject.tag == "Player")
         {
-            if (other.transform.position.y > transform.position.y + GetComponent<Collider2D>().bounds.size.y / 2) {
+            if (!spiked && other.transform.position.y > transform.position.y + GetComponent<Collider2D>().bounds.size.y / 2) {
                 Physics2D.IgnoreCollision(other.gameObject.GetComponent<Collider2D>(), GetComponent<BoxCollider2D>());
                 other.gameObject.GetComponent<Player>().bounce();
                 die();
