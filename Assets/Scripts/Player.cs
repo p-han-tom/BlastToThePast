@@ -91,6 +91,9 @@ public class Player : Rewinder
 
     void Move()
     {
+        if (transform.position.y > GetComponent<Collider2D>().bounds.size.y) {
+            Debug.Log("higher");
+        }
         // Set jump variables
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         rb.gravityScale = (isGrounded) ? 5f : 8f;

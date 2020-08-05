@@ -73,18 +73,23 @@ public class Enemy : Rewinder
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<Player>().Die();
+            if (other.transform.position.y > transform.position.y + GetComponent<Collider2D>().bounds.size.y / 2) {
+                Physics2D.IgnoreCollision(other.gameObject.GetComponent<Collider2D>(), GetComponent<BoxCollider2D>());
+                other.gameObject.GetComponent<Player>().bounce();
+                die();
+            } else 
+                other.gameObject.GetComponent<Player>().Die();
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "PlayerHurtBox" && spiked == false)
-        {
-            Physics2D.IgnoreCollision(other, GetComponent<BoxCollider2D>());
-            other.gameObject.transform.parent.GetComponent<Player>().bounce();
-            die();
-        }
+        // if (other.gameObject.tag == "PlayerHurtBox" && spiked == false)
+        // {
+        //     Physics2D.IgnoreCollision(other, GetComponent<BoxCollider2D>());
+        //     other.gameObject.transform.parent.GetComponent<Player>().bounce();
+        //     die();
+        // }
     }
     public bool isSpiked()
     {
