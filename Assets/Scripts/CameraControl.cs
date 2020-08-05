@@ -15,6 +15,7 @@ public class CameraControl : MonoBehaviour
     float maxCameraSpeed = 100f;
     void Start() {
         leader = GameObject.Find("Player").transform;
+        transform.position = new Vector3(leader.position.x, leader.position.y, transform.position.z);
     }
     void FixedUpdate()
     {

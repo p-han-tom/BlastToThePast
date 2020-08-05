@@ -125,6 +125,7 @@ MonoBehaviour:
   spiked: 1
   walksOffLedges: 1
   direction: 1
+  deathParticlePrefab: {fileID: 0}
 --- !u!212 &5667144242748368603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: 1344780287051860636, guid: 0429e526890c70b46b3a538d30546f14,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
