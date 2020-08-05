@@ -62,4 +62,34 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: 4957045cf8fe22a489ef6f00bf009705, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 1f8003468e351bd4f8bac9fb25e0f2f7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnterPortal
+    clip: {fileID: 8300000, guid: d305cce26c5219840838a607e10386aa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonPress
+    clip: {fileID: 8300000, guid: 75c42b6c5f34b6948b880deafb1ede91, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonRelease
+    clip: {fileID: 8300000, guid: 75c42b6c5f34b6948b880deafb1ede91, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   isGameAM: 1

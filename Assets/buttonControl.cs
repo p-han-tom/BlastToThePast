@@ -8,10 +8,12 @@ public class buttonControl : MonoBehaviour
     private Sprite defaultSprite;
     private bool pressed = false;
     private SpriteRenderer sr;
+    private AudioManager audioManager;
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         defaultSprite = sr.sprite;
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -21,12 +23,14 @@ public class buttonControl : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
+            audioManager.Play("ButtonPress");
             pressed = true;
             sr.sprite = pressedSprite;
         }
     }
     void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
+            audioManager.Play("ButtonRelease");
             pressed = false;
             sr.sprite = defaultSprite;
         }
