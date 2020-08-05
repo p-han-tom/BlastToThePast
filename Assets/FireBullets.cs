@@ -22,16 +22,17 @@ public class FireBullets : MonoBehaviour
             lineRenderer.positionCount = 1;
             lineRenderer.SetPosition(0, firepoint.position);
             StartCoroutine(Camera.main.GetComponent<CameraControl>().cameraShake(0.05f,0.5f));
-            
+
 
             Vector3 direction = new Vector3(mousePos.x - firepoint.position.x, mousePos.y - firepoint.position.y, 0);
             RaycastHit2D rayInfo = Physics2D.Raycast(firepoint.position, direction);
             
             for (int i = 0; i < reflections; i ++) {
-                if (rayInfo && !rayInfo.transform.CompareTag("Player")) {
+                if (rayInfo) {
                     lineRenderer.positionCount++;
                     lineRenderer.SetPosition(lineRenderer.positionCount - 1, rayInfo.point);
                     Instantiate(particlesPrefab, rayInfo.point, Quaternion.identity);
+                    
 
                     if (rayInfo.transform.CompareTag("Mirror")) {    
                         direction = Vector2.Reflect(direction,rayInfo.normal);
@@ -55,16 +56,12 @@ public class FireBullets : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        // Eventually comparetag for wall
-        if (other.gameObject.CompareTag("Mirror")) {
-            inWall = true;
-        }
+        inWall = true;
+        
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        // Eventually comparetag for wall
-        if (other.gameObject.CompareTag("Mirror")) {
-            inWall = false;
-        }
+        inWall = false;
+        
     }
 }

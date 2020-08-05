@@ -73,7 +73,7 @@ public class Enemy : Rewinder
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<Player>().die();
+            other.gameObject.GetComponent<Player>().Die();
         }
     }
 

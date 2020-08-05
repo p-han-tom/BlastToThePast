@@ -34,6 +34,9 @@ public class Player : Rewinder
     // Gun related
     Transform pivot;
 
+    // Prefabs
+    public GameObject jumpParticlePrefab;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -99,6 +102,7 @@ public class Player : Rewinder
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
+            Instantiate(jumpParticlePrefab, transform.position, Quaternion.identity);
         }
 
         // Jump higher while key is pressed
@@ -143,7 +147,7 @@ public class Player : Rewinder
         isJumping = true;
         jumpTimer = jumpDuration;
     }
-    public void die()
+    public void Die()
     {
 
         Debug.Log("AHHHHHHHHHHHHHHH FUCK");
@@ -158,4 +162,11 @@ public class Player : Rewinder
         if (orbCount >= portal.orbsRequired) portal.ActivatePortal();
     }
     public int getOrbCount() { return orbCount; }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+            
+            Instantiate(jumpParticlePrefab, transform.position, Quaternion.identity);
+        }
+    }
 }

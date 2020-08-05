@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 104392131}
   - component: {fileID: 104392132}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Line
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,9 +149,9 @@ GameObject:
   - component: {fileID: 588580335}
   - component: {fileID: 1930261032}
   - component: {fileID: 1685015677}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,7 +249,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3840491, y: -0.009769946}
+  m_Offset: {x: -0.52751577, y: -0.009769946}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -260,7 +260,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5124213, y: 0.26628664}
+  m_Size: {x: 0.4406877, y: 0.26628664}
   m_EdgeRadius: 0
 --- !u!1 &706987958
 GameObject:
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 706987959}
   - component: {fileID: 706987960}
   - component: {fileID: 706987961}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hurtbox
   m_TagString: PlayerHurtBox
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0.044472456, y: -0.51853585}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -318,7 +318,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.20000005}
+  m_Size: {x: 0.31834126, y: 0.14809895}
   m_EdgeRadius: 0
 --- !u!114 &706987961
 MonoBehaviour:
@@ -341,9 +341,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 912014715}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,9 +372,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011738113}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Feet
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,9 +402,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2107898237}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 5441025114044346215}
   - component: {fileID: 5441025114044346214}
   - component: {fileID: 1783115973}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -533,6 +533,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  jumpParticlePrefab: {fileID: 2968902252748793005, guid: f7912f7db7e298b4096b775ad0f81efa,
+    type: 3}
 --- !u!95 &5441025114044346213
 Animator:
   serializedVersion: 3
