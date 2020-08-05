@@ -9,22 +9,26 @@ public class OrbControl : MonoBehaviour
 
     Vector3 posOffset = new Vector3();
     Vector3 tempPos = new Vector3();
+    Transform sprite;
     void Start()
     {
-        posOffset = transform.position;
+        sprite = transform.Find("Sprite");
+        
     }
 
     void Update()
     {
+        posOffset = transform.position;
         tempPos = posOffset;
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
 
-        transform.position = tempPos;
+        sprite.position = tempPos;
     }
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
             other.gameObject.GetComponent<Player>().gainOrb();
             Collected();
+            return;
         }            
     }
     void Collected() {
