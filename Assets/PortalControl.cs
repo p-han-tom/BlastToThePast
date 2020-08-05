@@ -26,7 +26,7 @@ public class PortalControl : MonoBehaviour
     {
         if (active && other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<Player>().win();
+            other.gameObject.GetComponent<Player>().EnterPortalWin(transform.position);
         }
     }
     public void ActivatePortal() {

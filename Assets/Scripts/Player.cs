@@ -9,6 +9,7 @@ public class Player : Rewinder
     // Attacking variables
     bool isAttacking;
     bool isBeingAttacked;
+    bool notSuckedUpByPortal = true;
 
     // Movement and jump related variables
     public LayerMask groundLayer;
@@ -57,52 +58,54 @@ public class Player : Rewinder
     }
     void FixedUpdate()
     {
-        MoveAfterImage();
-        Move();
+        if (notSuckedUpByPortal)
+        {
+            MoveAfterImage();
+            Move();
+        }
     }
 
     void CheckInput()
     {
-        // Mouse position relative to player
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-        direction.Normalize();
+        if (notSuckedUpByPortal)
+        {// Mouse position relative to player
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+            direction.Normalize();
 
-        // Check for movement and change animations accordingly
-        moveInput = Input.GetAxisRaw("Horizontal");
+            // Check for movement and change animations accordingly
+            moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Listen for rewind key press
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Rewind();
+            // Listen for rewind key press
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Rewind();
+            }
+
+            // Listen for gun shot
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(mousePos));
+            }
         }
-
-        // Listen for gun shot
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(transform.Find("Pivot").Find("Gun").GetComponent<FireBullets>().FireBullet(mousePos));
-        }
-
-        // Listen for restart
-        if(Input.GetKeyDown(KeyCode.R)){
-             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
-         }
     }
 
     void Move()
     {
-        if (transform.position.y > GetComponent<Collider2D>().bounds.size.y) {
-            Debug.Log("higher");
-        }
+
+        // if (transform.position.y > GetComponent<Collider2D>().bounds.size.y)
+        // {
+        //     Debug.Log("higher");
+        // }
         // Set jump variables
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         rb.gravityScale = (isGrounded) ? 5f : 8f;
 
-        if (isGrounded) 
+        if (isGrounded)
             animator.SetFloat("yVelocity", 0);
-        else 
+        else
             animator.SetFloat("yVelocity", rb.velocity.y);
-        
+
         animator.SetBool("moving", (rb.velocity == Vector2.zero || !isGrounded) ? false : true);
 
 
@@ -161,14 +164,32 @@ public class Player : Rewinder
     {
         Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         // Prompt restart
-
-
         Destroy(afterimage);
         Destroy(gameObject);
     }
-    public void win()
+    public void EnterPortalWin(Vector2 portalPos)
     {
-        Debug.Log("dub");
+        Destroy(afterimage);
+        notSuckedUpByPortal = false;
+        GetComponent<Collider2D>().enabled = false;
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+        StartCoroutine(EnterPortalSpin(portalPos));
+        GameObject.Find("HUD").GetComponent<HUDControl>().StopTimer();
+    }
+    IEnumerator EnterPortalSpin(Vector2 portalPos)
+    {
+        float spinTimeElapsed = 0f;
+        float rotationAcceleration = 5f;
+        float duration = 2f;
+        while (spinTimeElapsed < duration)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, portalPos, 4f * Time.deltaTime);
+            rb.rotation += rotationAcceleration;
+            transform.localScale -= new Vector3(Time.deltaTime / duration, Time.deltaTime / duration, 0);
+            spinTimeElapsed += Time.deltaTime;
+            yield return null;
+        }
     }
     public void gainOrb()
     {
@@ -177,9 +198,11 @@ public class Player : Rewinder
     }
     public int getOrbCount() { return orbCount; }
 
-    void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
-            
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+
             Instantiate(jumpParticlePrefab, transform.position, Quaternion.identity);
         }
     }
