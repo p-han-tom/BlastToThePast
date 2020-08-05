@@ -535,6 +535,8 @@ MonoBehaviour:
     m_Bits: 256
   jumpParticlePrefab: {fileID: 2968902252748793005, guid: f7912f7db7e298b4096b775ad0f81efa,
     type: 3}
+  deathParticlePrefab: {fileID: 4806726788964189713, guid: d87b02589d2303a4d82c7e7cfaa92563,
+    type: 3}
 --- !u!95 &5441025114044346213
 Animator:
   serializedVersion: 3
