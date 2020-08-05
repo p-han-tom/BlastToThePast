@@ -106,7 +106,7 @@ public class Player : Rewinder
         else
             animator.SetFloat("yVelocity", rb.velocity.y);
 
-        animator.SetBool("moving", (rb.velocity == Vector2.zero || !isGrounded) ? false : true);
+        animator.SetBool("moving", ((rb.velocity.x >= -0.1f && rb.velocity.x <= 0.1f) || !isGrounded) ? false : true);
 
 
         // Start the jump
