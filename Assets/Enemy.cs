@@ -21,6 +21,9 @@ public class Enemy : Rewinder
     // Components
     private Rigidbody2D rb;
     private AudioManager audioManager;
+
+    // Prefab
+    public GameObject deathParticlePrefab;
     void Start()
     {
         feetPos = transform.Find("Feet");
@@ -99,6 +102,7 @@ public class Enemy : Rewinder
     }
     public void die()
     {
+        Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         audioManager.Play("Death");
         Destroy(afterimage);
         Destroy(gameObject);

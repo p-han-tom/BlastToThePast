@@ -10,11 +10,16 @@ public class PortalControl : MonoBehaviour
     private float rotateSpeedActive = 80f;
     private float rotateSpeedCurrent;
     private SpriteRenderer sr;
+
     public Sprite activeSprite;
+    public GameObject portalParticlePrefab;
+    public GameObject inactivePortalParticlePrefab;
+    GameObject inactivePortalParticles;
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         if (orbsRequired == 0) active = true;
+        else inactivePortalParticles = Instantiate(inactivePortalParticlePrefab, transform.position, Quaternion.identity);
         rotateSpeedCurrent = rotateSpeedInactive;
         if (active) ActivatePortal();
     }
@@ -30,8 +35,10 @@ public class PortalControl : MonoBehaviour
         }
     }
     public void ActivatePortal() {
+        Destroy(inactivePortalParticles);
         active = true;
         rotateSpeedCurrent = rotateSpeedActive;
         sr.sprite = activeSprite;
+        Instantiate(portalParticlePrefab, transform.position, Quaternion.identity);
     }
 }

@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbsRequired: 0
   activeSprite: {fileID: 21300000, guid: c348bb7b9edb2804daabb09418c334c9, type: 3}
+  portalParticlePrefab: {fileID: 84138589532605504, guid: 392861e6f1cb9894498fb322a2b98622,
+    type: 3}
+  inactivePortalParticlePrefab: {fileID: 7370935833060337406, guid: 10c351604f78e20479e758241cff402f,
+    type: 3}
 --- !u!212 &7859220084717123055
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -185,6 +185,8 @@ MonoBehaviour:
   spiked: 0
   walksOffLedges: 1
   direction: 1
+  deathParticlePrefab: {fileID: 8690991312518113601, guid: 51102e422341f9c4eace703caa92e257,
+    type: 3}
 --- !u!212 &8733335760554951377
 SpriteRenderer:
   m_ObjectHideFlags: 0
