@@ -102,7 +102,8 @@ public class HUDControl : MonoBehaviour
         int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 19);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
         float score = (19.999f - timer) * (19 - rewinds) * 10;
-        for (int i = starThresholds.HowManyStars(score)-1; i >= 0; i--) {
+        for (int i = 2; i > starThresholds.HowManyStars(score)-1; i--) {
+            Debug.Log(clearedPopup.transform.Find("Stars").GetChild(i).name);
             clearedPopup.transform.Find("Stars").GetChild(i).GetComponent<Image>().sprite = emptyStar;
         }
         if (highscore < score)
