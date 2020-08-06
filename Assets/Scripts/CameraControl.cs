@@ -9,8 +9,6 @@ public class CameraControl : MonoBehaviour
     Vector3 leaderVelocity;
     Vector3 mousePos;
     Vector3 leaderPos;
-    float xMaxDist = 1f;
-    float yMaxDist = 1f;
     float cameraTime = 0.1f;
     float maxCameraSpeed = 100f;
     void Start() {

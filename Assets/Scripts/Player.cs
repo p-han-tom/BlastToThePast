@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Player : Rewinder
 {
+
+    void Awake() {
+        // PlayerPrefs.DeleteAll();
+    }
     // Attacking variables
     bool isAttacking;
     bool isBeingAttacked;
