@@ -107,7 +107,8 @@ public class HUDControl : MonoBehaviour
         int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 14);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
         float score = (19.999f - timer) * (14 - rewinds) * 10;
-        for (int i = 2; i > starThresholds.HowManyStars(score)-1; i--) {
+        int stars = starThresholds.HowManyStars(score);
+        for (int i = 2; i > stars-1; i--) {
             Debug.Log(clearedPopup.transform.Find("Stars").GetChild(i).name);
             clearedPopup.transform.Find("Stars").GetChild(i).GetComponent<Image>().sprite = emptyStar;
         }
@@ -119,6 +120,7 @@ public class HUDControl : MonoBehaviour
             bestTime = timer;
             PlayerPrefs.SetInt(levelKey + "BestRewinds", rewinds);
             bestRewinds = rewinds;
+            PlayerPrefs.SetInt(levelKey+"Stars", stars);
             clearedStats.text = "<size=60><color=#ffa726>new highscore!</color></size>";
             clearedHighscore.text = "<color=#ffa726>Best clear</color>: <color=#91a7ff>" + Math.Round(bestTime, 3) + " seconds</color> using <color=#42bd41>" + bestRewinds + " rewinds</color>\nHighscore: " + Math.Round(highscore, 0);
         }
