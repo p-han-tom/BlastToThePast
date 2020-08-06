@@ -75,7 +75,6 @@ public class HUDControl : MonoBehaviour
         paused = true;
         pauseMenu.SetActive(true);
     }
-
     public void Unpause() {
         Time.timeScale = 1;
         paused = false;
@@ -88,6 +87,11 @@ public class HUDControl : MonoBehaviour
     }
     public void EnableInstructions(){instructions.SetActive(true);}
     public void DisableInstructions(){instructions.SetActive(false);}
+
+    public void SelectLevel(string sceneName) {
+        SceneManager.LoadScene(sceneName);
+    }
+
     void Update()
     {
         UpdateTimer();
