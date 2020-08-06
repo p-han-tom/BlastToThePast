@@ -55,6 +55,7 @@ public class HUDControl : MonoBehaviour
         // Listen for restart
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Unpause();
             audioManager.Play("RestartLevel");
             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
         }
@@ -79,6 +80,7 @@ public class HUDControl : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
         pauseMenu.SetActive(false);
+        DisableInstructions();
     }
     public void GoToHomeMenu() {
         Debug.Log("GOING HOOOOOME");
