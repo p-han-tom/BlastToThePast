@@ -16,7 +16,7 @@ public class Player : Rewinder
     bool isGrounded;
     public bool isJumping;
     Transform feetPos;
-    float checkRadius = 0.1f;
+    float checkRadius = 0.25f;
     float movementSpeed = 5f;
     float jumpForce = 10f;
     float moveInput;
@@ -113,7 +113,8 @@ public class Player : Rewinder
         if (isGrounded) 
             animator.SetFloat("yVelocity", 0);
         else {
-            coyoteTimer = coyoteTime;
+            if (rb.velocity.y < 0 && coyoteTimer == 0) 
+                coyoteTimer = coyoteTime;
             animator.SetFloat("yVelocity", rb.velocity.y);
         }
         animator.SetBool("moving", ((rb.velocity.x >= -0.1f && rb.velocity.x <= 0.1f) || !isGrounded) ? false : true);
