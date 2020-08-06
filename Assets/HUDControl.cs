@@ -131,6 +131,8 @@ public class HUDControl : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene("Main Menu");
+        PlayerPrefs.SetString("Loaded", "false");
+
     }
     public void EnableInstructions() { instructions.SetActive(true); }
     public void DisableInstructions() { instructions.SetActive(false); }
@@ -139,6 +141,7 @@ public class HUDControl : MonoBehaviour
     public void SelectLevel(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        PlayerPrefs.SetString("Loaded", "false");
         StartCoroutine(GameObject.Find("LevelLoader").GetComponent<LevelLoader>().fade(sceneName));
 
     }

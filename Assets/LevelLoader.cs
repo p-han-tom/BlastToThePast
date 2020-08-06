@@ -7,6 +7,13 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition; 
 
+    void Start() {
+        if (PlayerPrefs.GetString("Loaded") == "false") {
+            transition.SetTrigger("Loaded");
+            PlayerPrefs.SetString("Loaded", "true");
+        }
+        
+    }
     
     public IEnumerator fade(string scene) {
         transition.SetTrigger("Start");
