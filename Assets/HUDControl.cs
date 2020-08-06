@@ -176,7 +176,6 @@ public class HUDControl : MonoBehaviour
     public void EnableInstructions()
     {
         instructions.SetActive(true);
-        PlayerPrefs.DeleteAll();
     }
     public void DisableInstructions() { instructions.SetActive(false); }
     public void EnableLevelSelect()
@@ -195,10 +194,15 @@ public class HUDControl : MonoBehaviour
     }
     public void UpdateAllLevelMinistars()
     {
+        int levelsBeaten = 0;
         foreach (GameObject m in ministars)
         {
             m.GetComponent<MinistarsControl>().UpdateMinistars();
+            if (m.GetComponent<MinistarsControl>().stars > 0) 
+                levelsBeaten ++;
         }
+        PlayerPrefs.SetInt("LevelsBeaten", levelsBeaten);
+        
     }
     void Update()
     {
