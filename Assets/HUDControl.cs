@@ -99,9 +99,9 @@ public class HUDControl : MonoBehaviour
     {
         string levelKey = "Level" + SceneManager.GetActiveScene().name;
         float bestTime = PlayerPrefs.GetFloat(levelKey + "BestTime", 19.999f);
-        int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 19);
+        int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 14);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
-        float score = (19.999f - timer) * (19 - rewinds) * 10;
+        float score = (19.999f - timer) * (14 - rewinds) * 10;
         for (int i = 2; i > starThresholds.HowManyStars(score)-1; i--) {
             Debug.Log(clearedPopup.transform.Find("Stars").GetChild(i).name);
             clearedPopup.transform.Find("Stars").GetChild(i).GetComponent<Image>().sprite = emptyStar;
