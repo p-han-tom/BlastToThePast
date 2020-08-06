@@ -83,7 +83,8 @@ public class HUDControl : MonoBehaviour
         DisableInstructions();
     }
     public void GoToHomeMenu() {
-        Debug.Log("GOING HOOOOOME");
+        Unpause();
+        SceneManager.LoadScene("Main Menu");
     }
     public void EnableInstructions(){instructions.SetActive(true);}
     public void DisableInstructions(){instructions.SetActive(false);}
