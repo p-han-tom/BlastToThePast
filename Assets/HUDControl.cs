@@ -21,6 +21,7 @@ public class HUDControl : MonoBehaviour
     private TextMeshProUGUI clearedStats;
     private TextMeshProUGUI clearedHighscore;
     private GameObject levelSelectPopup;
+    private String sceneName;
 
     public bool paused = false;
 
@@ -36,9 +37,12 @@ public class HUDControl : MonoBehaviour
         pauseMenu = transform.Find("Pause Menu").gameObject;
         pauseMenu.SetActive(false);
         clearedPopup = transform.Find("Cleared Popup").gameObject;
+        clearedStats = clearedPopup.transform.Find("Stats").GetComponent<TextMeshProUGUI>();
+        clearedHighscore = clearedPopup.transform.Find("Highscore").GetComponent<TextMeshProUGUI>();
         clearedPopup.SetActive(false);
         levelSelectPopup = transform.Find("Level Select").gameObject;
         levelSelectPopup.SetActive(false);
+        sceneName = SceneManager.GetActiveScene().name;
     }
 
     public void IncreaseRewinds()
@@ -52,12 +56,12 @@ public class HUDControl : MonoBehaviour
         if (timerStopped == false)
         {
             timer += Time.deltaTime;
-            if (timer >= 20f && SceneManager.GetActiveScene().name != "Main Menu") PromptRestart();
+            if (timer >= 20f && sceneName != "Main Menu") PromptRestart();
             timerDisplay.text = "TIME: " + Math.Round(timer, 3);
         }
     }
     public void StopTimer() { timerStopped = true; }
-    public float GetTimer() {return timer;}
+    public float GetTimer() { return timer; }
     void CheckInput()
     {
         // Listen for restart
@@ -69,41 +73,69 @@ public class HUDControl : MonoBehaviour
         }
 
         // Listen for pause
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
-            if (paused) {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            if (paused)
+            {
                 Unpause();
-            } else {
+            }
+            else
+            {
                 Pause();
             }
         }
     }
-    public void PromptRestart() {restartPrompt.SetActive(true);}
-    public void Pause() {
+    public void PromptRestart() { restartPrompt.SetActive(true); }
+    public void Pause()
+    {
         Time.timeScale = 0;
         paused = true;
         pauseMenu.SetActive(true);
     }
-    public void LevelCleared() {
+    public void LevelCleared()
+    {
+        string levelKey = "Level" + SceneManager.GetActiveScene().name;
+        float bestTime = PlayerPrefs.GetFloat(levelKey + "BestTime", 359.999f);
+        int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 99);
+        float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
+        float score = (359.999f - timer) * (99 - rewinds);
+        if (highscore < score)
+        {
+            PlayerPrefs.SetFloat(levelKey + "Highscore", score);
+            highscore = score;
+            PlayerPrefs.SetFloat(levelKey + "BestTime", timer);
+            bestTime = timer;
+            PlayerPrefs.SetInt(levelKey + "BestRewinds", rewinds);
+            bestRewinds = rewinds;
+            clearedStats.text = "<size=60><color=#ffa726>new highscore!</color></size>";
+            clearedHighscore.text = "<color=#ffa726>Best clear</color>: <color=#91a7ff>" + Math.Round(bestTime, 3) + " seconds</color> using <color=#42bd41>" + bestRewinds + " rewinds</color>\nHighscore: " + Math.Round(highscore, 0);
+        }
+        else
+        {
+            clearedStats.text = "Cleared in <color=#91a7ff>" + Math.Round(timer, 3) + " seconds</color> using <color=#42bd41>" + rewinds + " rewinds</color>\nTotal score: " + Math.Round(score, 0);
+            clearedHighscore.text = "<color=#ffa726>Best clear</color>: <color=#91a7ff>" + Math.Round(bestTime, 3) + " seconds</color> using <color=#42bd41>" + bestRewinds + " rewinds</color>\nHighscore: " + Math.Round(highscore, 0);
+        }
         clearedPopup.SetActive(true);
-        // clearedPopup.Find("Stats");
-        // .GetComponent<TextMeshProUGUI>().text = "Cleared in <color=#91a7ff>"+timer+" seconds</color> using <color=#42bd41>"+rewinds+" rewinds</color>";
     }
-    public void GoToNextLevel() {Debug.Log("next level brah");}
-    public void Unpause() {
+    public void GoToNextLevel() { Debug.Log("next level brah"); }
+    public void Unpause()
+    {
         Time.timeScale = 1;
         paused = false;
         pauseMenu.SetActive(false);
         DisableInstructions();
     }
-    public void GoToHomeMenu() {
+    public void GoToHomeMenu()
+    {
         Unpause();
         SceneManager.LoadScene("Main Menu");
     }
-    public void EnableInstructions(){instructions.SetActive(true);}
-    public void DisableInstructions(){instructions.SetActive(false);}
-    public void EnableLevelSelect(){levelSelectPopup.SetActive(true);}
-    public void DisableLevelSelect(){levelSelectPopup.SetActive(false);}
-    public void SelectLevel(string sceneName) {
+    public void EnableInstructions() { instructions.SetActive(true); }
+    public void DisableInstructions() { instructions.SetActive(false); }
+    public void EnableLevelSelect() { levelSelectPopup.SetActive(true); }
+    public void DisableLevelSelect() { levelSelectPopup.SetActive(false); }
+    public void SelectLevel(string sceneName)
+    {
         SceneManager.LoadScene(sceneName);
         StartCoroutine(GameObject.Find("LevelLoader").GetComponent<LevelLoader>().fade(sceneName));
 
