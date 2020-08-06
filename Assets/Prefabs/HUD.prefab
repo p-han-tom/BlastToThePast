@@ -6067,7 +6067,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 979526412687933690}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -7701,10 +7701,10 @@ MonoBehaviour:
   m_text: 'Welcome to <size=50><color=#42bd41>blast</color> <color=white>to the</color>
     <color=#91a7ff>past</color>! </size>
 
-    - WASD or Arrow keys to move
+    - WASD to move and jump
 
-    -
-    Left click to shoot the <color=#91a7ff>rewinder</color>
+    - Left
+    click to shoot the <color=#91a7ff>rewinder</color>
 
     - e to <color=#91a7ff>rewind</color>
     yourself

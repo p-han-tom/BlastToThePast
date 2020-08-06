@@ -6,12 +6,9 @@ using UnityEngine.UI;
 public class MinistarsControl : MonoBehaviour
 {
     public string level;
-    private Sprite fullMinistar;
+    public Sprite fullMinistar;
     public Sprite emptyMinistar;
     private int stars;
-    void Start() {
-        fullMinistar = transform.GetChild(0).GetComponent<Image>().sprite;   
-    }
     public void UpdateMinistars() {
         stars = PlayerPrefs.GetInt("Level"+level+"Stars", 0);
         for (int i = 2; i >= 0; i--) {

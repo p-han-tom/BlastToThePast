@@ -299,4 +299,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 
+  fullMinistar: {fileID: 21300000, guid: 04e9c5b8dbe9d6f46b8ae32ab62e097d, type: 3}
   emptyMinistar: {fileID: 21300000, guid: d1b913b09aec06a44b9bb9da75c8275d, type: 3}

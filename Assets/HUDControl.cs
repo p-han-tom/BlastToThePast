@@ -172,7 +172,8 @@ public class HUDControl : MonoBehaviour
         PlayerPrefs.SetString("Loaded", "false");
 
     }
-    public void EnableInstructions() { instructions.SetActive(true);}
+    public void EnableInstructions() { instructions.SetActive(true); 
+    PlayerPrefs.DeleteAll();}
     public void DisableInstructions() { instructions.SetActive(false); }
     public void EnableLevelSelect()
     {
