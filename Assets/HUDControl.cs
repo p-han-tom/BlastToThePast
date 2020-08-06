@@ -88,7 +88,6 @@ public class HUDControl : MonoBehaviour
     public void PromptRestart() { restartPrompt.SetActive(true); }
     public void Pause()
     {
-        PlayerPrefs.DeleteAll();
         Time.timeScale = 0;
         paused = true;
         pauseMenu.SetActive(true);
