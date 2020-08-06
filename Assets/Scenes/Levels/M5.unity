@@ -19435,12 +19435,12 @@ PrefabInstance:
     - target: {fileID: 4684785161705290084, guid: 6e1f9acf79db93d48b6a4a61f735a92b,
         type: 3}
       propertyPath: star3t
-      value: 2400
+      value: 1700
       objectReference: {fileID: 0}
     - target: {fileID: 4684785161705290084, guid: 6e1f9acf79db93d48b6a4a61f735a92b,
         type: 3}
       propertyPath: star2t
-      value: 1900
+      value: 1400
       objectReference: {fileID: 0}
     - target: {fileID: 4684785161705290085, guid: 6e1f9acf79db93d48b6a4a61f735a92b,
         type: 3}
