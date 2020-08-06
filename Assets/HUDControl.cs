@@ -88,6 +88,7 @@ public class HUDControl : MonoBehaviour
     public void PromptRestart() { restartPrompt.SetActive(true); }
     public void Pause()
     {
+        PlayerPrefs.DeleteAll();
         Time.timeScale = 0;
         paused = true;
         pauseMenu.SetActive(true);
@@ -95,12 +96,13 @@ public class HUDControl : MonoBehaviour
     public void LevelCleared()
     {
         string levelKey = "Level" + SceneManager.GetActiveScene().name;
-        float bestTime = PlayerPrefs.GetFloat(levelKey + "BestTime", 359.999f);
-        int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 99);
+        float bestTime = PlayerPrefs.GetFloat(levelKey + "BestTime", 29.999f);
+        int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 19);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
-        float score = (359.999f - timer) * (99 - rewinds);
+        float score = (29.999f - timer) * (19 - rewinds);
         if (highscore < score)
         {
+            Debug.Log("WEOFIJ");
             PlayerPrefs.SetFloat(levelKey + "Highscore", score);
             highscore = score;
             PlayerPrefs.SetFloat(levelKey + "BestTime", timer);
