@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 7422041295626101953}
   - component: {fileID: 958239522117650846}
   - component: {fileID: 230250705344174324}
+  - component: {fileID: 1969883578214607560}
   m_Layer: 5
   m_Name: RestartPrompt
   m_TagString: Untagged
@@ -506,6 +507,20 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1969883578214607560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565123778258087712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e787a70ff2f4c04388349d972f0b07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.001
+  frequency: 1
 --- !u!1 &1909229151247645214
 GameObject:
   m_ObjectHideFlags: 0

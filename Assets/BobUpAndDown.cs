@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BobUpAndDown : MonoBehaviour
 {
-    private float amplitude = 0.001f;
-    private float frequency = 0.5f;
+    public float amplitude = 0.001f;
+    public float frequency = 0.5f;
 
     Vector3 posOffset = new Vector3();
     Vector3 tempPos = new Vector3();
