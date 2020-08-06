@@ -510,6 +510,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1452276355590862264, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1578338063265313414, guid: bbebe6ba9b5167346856d9edd3374744,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -705,6 +710,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2025744500523740370, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2329060802612262409, guid: bbebe6ba9b5167346856d9edd3374744,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -883,6 +893,31 @@ PrefabInstance:
     - target: {fileID: 6536540705404095827, guid: bbebe6ba9b5167346856d9edd3374744,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261194146444149839, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261194146444149839, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261194146444149839, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261194146444149839, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261194146444149839, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
