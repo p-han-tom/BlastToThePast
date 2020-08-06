@@ -96,10 +96,10 @@ public class HUDControl : MonoBehaviour
     public void LevelCleared()
     {
         string levelKey = "Level" + SceneManager.GetActiveScene().name;
-        float bestTime = PlayerPrefs.GetFloat(levelKey + "BestTime", 29.999f);
+        float bestTime = PlayerPrefs.GetFloat(levelKey + "BestTime", 19.999f);
         int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 19);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
-        float score = (29.999f - timer) * (19 - rewinds);
+        float score = (19.999f - timer) * (19 - rewinds) * 10;
         if (highscore < score)
         {
             Debug.Log("WEOFIJ");
