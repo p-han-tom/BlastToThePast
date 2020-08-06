@@ -124,6 +124,7 @@ public class HUDControl : MonoBehaviour
         int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 14);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
         float score = (19.999f - timer) * (14 - rewinds) * 10;
+        if (PlayerPrefs.GetInt(levelKey + "Stars", 0) == 0) PlayerPrefs.SetInt("LevelsBeaten", PlayerPrefs.GetInt("LevelsBeaten", 0) + 1);
         int stars = starThresholds.HowManyStars(score);
         for (int i = 2; i > stars - 1; i--)
         {
@@ -172,8 +173,11 @@ public class HUDControl : MonoBehaviour
         PlayerPrefs.SetString("Loaded", "false");
 
     }
-    public void EnableInstructions() { instructions.SetActive(true); 
-    PlayerPrefs.DeleteAll();}
+    public void EnableInstructions()
+    {
+        instructions.SetActive(true);
+        PlayerPrefs.DeleteAll();
+    }
     public void DisableInstructions() { instructions.SetActive(false); }
     public void EnableLevelSelect()
     {
