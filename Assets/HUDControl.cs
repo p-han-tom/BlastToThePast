@@ -139,6 +139,8 @@ public class HUDControl : MonoBehaviour
     public void SelectLevel(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        StartCoroutine(GameObject.Find("LevelLoader").GetComponent<LevelLoader>().fade(sceneName));
+
     }
 
     void Update()
