@@ -26,6 +26,9 @@ public class HUDControl : MonoBehaviour
     public bool paused = false;
     public Sprite emptyStar;
 
+    private List<string> levelOrder = new List<string>(){"E1","E2","E3","E4","E5","M1","M2","M3","M4","M5","H1","H2","H3","H4","H5"};
+    private int currentLevel;
+
     void Start()
     {
         rewindsDisplay = transform.Find("Rewinds").GetComponent<TextMeshProUGUI>();
@@ -45,6 +48,8 @@ public class HUDControl : MonoBehaviour
         levelSelectPopup.SetActive(false);
         sceneName = SceneManager.GetActiveScene().name;
         starThresholds = GameObject.Find("StarThresholds").GetComponent<StarThresholds>();
+
+        currentLevel = levelOrder.IndexOf(SceneManager.GetActiveScene().name);
     }
 
     public void IncreaseRewinds()
@@ -124,7 +129,14 @@ public class HUDControl : MonoBehaviour
         }
         clearedPopup.SetActive(true);
     }
-    public void GoToNextLevel() { Debug.Log("next level brah"); }
+    public void GoToNextLevel() { 
+        if (currentLevel == levelOrder.Count-1) 
+            SceneManager.LoadScene(levelOrder[0]);
+        else
+            SceneManager.LoadScene(levelOrder[currentLevel+1]);
+        PlayerPrefs.SetString("Loaded", "false");
+
+    }
     public void Unpause()
     {
         Time.timeScale = 1;
