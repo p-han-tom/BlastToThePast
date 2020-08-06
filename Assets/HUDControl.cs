@@ -28,6 +28,7 @@ public class HUDControl : MonoBehaviour
 
     private List<string> levelOrder = new List<string>(){"E1","E2","E3","E4","E5","M1","M2","M3","M4","M5","H1","H2","H3","H4","H5"};
     private int currentLevel;
+    private TextMeshProUGUI currentLevelDisplay;
 
     void Start()
     {
@@ -50,6 +51,15 @@ public class HUDControl : MonoBehaviour
         starThresholds = GameObject.Find("StarThresholds").GetComponent<StarThresholds>();
 
         currentLevel = levelOrder.IndexOf(SceneManager.GetActiveScene().name);
+        currentLevelDisplay = transform.Find("Current Level").GetComponent<TextMeshProUGUI>();
+
+        if (currentLevel <= 4) {
+            currentLevelDisplay.text = "Level: Easy " + (currentLevel+1);
+        } else if (currentLevel <= 9) {
+            currentLevelDisplay.text = "Level: Medium " + (currentLevel%5 + 1);
+        } else {
+            currentLevelDisplay.text = "Level: Hard " + (currentLevel%5 + 1);
+        }
     }
 
     public void IncreaseRewinds()
