@@ -116,4 +116,10 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: RestartLevel
+    clip: {fileID: 8300000, guid: 94f8a79049694a14795a5c420905fd99, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   isGameAM: 1

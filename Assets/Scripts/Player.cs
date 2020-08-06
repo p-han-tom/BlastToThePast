@@ -36,6 +36,7 @@ public class Player : Rewinder
     // Gun related
     Transform pivot;
     AudioManager audioManager;
+    HUDControl hc;
 
     // Prefabs
     public GameObject jumpParticlePrefab;
@@ -52,6 +53,7 @@ public class Player : Rewinder
         portal = GameObject.Find("Portal").GetComponent<PortalControl>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         audioManager.Find("Orb").source.pitch = 1f;
+        hc = GameObject.Find("HUD").GetComponent<HUDControl>();
     }
 
     void Update()
@@ -170,7 +172,7 @@ public class Player : Rewinder
     {
         audioManager.Play("PlayerDeath");
         Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
-        // Prompt restart
+        hc.PromptRestart();
         Destroy(afterimage);
         Destroy(gameObject);
     }
@@ -183,7 +185,7 @@ public class Player : Rewinder
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
         StartCoroutine(EnterPortalSpin(portalPos));
-        GameObject.Find("HUD").GetComponent<HUDControl>().StopTimer();
+        hc.StopTimer();
     }
     IEnumerator EnterPortalSpin(Vector2 portalPos)
     {
