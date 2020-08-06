@@ -6,6 +6,7 @@ public class SwitchSceneButton : MonoBehaviour
 {
 
     private HUDControl hud;
+    public GameObject toSetActive;
 
     void Start() {
         hud = GameObject.Find("HUD").GetComponent<HUDControl>();
@@ -13,14 +14,14 @@ public class SwitchSceneButton : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            // hud.Pause();
+            toSetActive.SetActive(true);
 
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            // hud.Unpause();
+            toSetActive.SetActive(false);
             
         }
     }
