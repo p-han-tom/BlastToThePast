@@ -27,11 +27,13 @@ public class HUDControl : MonoBehaviour
     public Sprite emptyStar;
 
     private List<string> levelOrder = new List<string>(){"E1","E2","E3","E4","E5","M1","M2","M3","M4","M5","H1","H2","H3","H4","H5"};
+    public static GameObject[] ministars;
     private int currentLevel;
     private TextMeshProUGUI currentLevelDisplay;
 
     void Start()
     {
+        if (ministars == null) ministars = GameObject.FindGameObjectsWithTag("Ministars");
         rewindsDisplay = transform.Find("Rewinds").GetComponent<TextMeshProUGUI>();
         timerDisplay = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
@@ -119,7 +121,6 @@ public class HUDControl : MonoBehaviour
         float score = (19.999f - timer) * (14 - rewinds) * 10;
         int stars = starThresholds.HowManyStars(score);
         for (int i = 2; i > stars-1; i--) {
-            Debug.Log(clearedPopup.transform.Find("Stars").GetChild(i).name);
             clearedPopup.transform.Find("Stars").GetChild(i).GetComponent<Image>().sprite = emptyStar;
         }
         if (highscore < score)
@@ -140,6 +141,7 @@ public class HUDControl : MonoBehaviour
             clearedHighscore.text = "<color=#ffa726>Best clear</color>: <color=#91a7ff>" + Math.Round(bestTime, 3) + " seconds</color> using <color=#42bd41>" + bestRewinds + " rewinds</color>\nHighscore: " + Math.Round(highscore, 0);
         }
         clearedPopup.SetActive(true);
+        UpdateAllLevelMinistars();
     }
     public void GoToNextLevel() { 
         if (currentLevel == levelOrder.Count-1) 
@@ -174,7 +176,11 @@ public class HUDControl : MonoBehaviour
         StartCoroutine(GameObject.Find("LevelLoader").GetComponent<LevelLoader>().fade(sceneName));
 
     }
-
+    public void UpdateAllLevelMinistars() {
+        foreach (GameObject m in ministars) {
+            m.GetComponent<MinistarsControl>().UpdateMinistars();
+        }
+    }
     void Update()
     {
         UpdateTimer();
