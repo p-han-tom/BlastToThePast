@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class SwitchSceneButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    private HUDControl hud;
+
+    void Start() {
+        hud = GameObject.Find("HUD").GetComponent<HUDControl>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            // hud.Pause();
+
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            // hud.Unpause();
+            
+        }
     }
 }

@@ -16,7 +16,7 @@ public class HUDControl : MonoBehaviour
     private AudioManager audioManager;
     private GameObject restartPrompt;
 
-    private bool paused = false;
+    public bool paused = false;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class HUDControl : MonoBehaviour
         if (timerStopped == false)
         {
             timer += Time.deltaTime;
-            if (timer >= 20f) PromptRestart();
+            if (timer >= 20f && SceneManager.GetActiveScene().name != "Main Menu") PromptRestart();
             timerDisplay.text = "TIME: " + Math.Round(timer, 3);
         }
     }
@@ -56,15 +56,22 @@ public class HUDControl : MonoBehaviour
         // Listen for pause
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (paused) {
-                Time.timeScale = 1;
-                paused = false;
-            } else  {
-                Time.timeScale = 0;
-                paused = true;
+                Unpause();
+            } else {
+                Pause();
             }
         }
     }
     public void PromptRestart() {restartPrompt.SetActive(true);}
+    public void Pause() {
+        Time.timeScale = 0;
+        paused = true;
+    }
+
+    public void Unpause() {
+        Time.timeScale = 1;
+        paused = false;
+    }
     void Update()
     {
         UpdateTimer();
