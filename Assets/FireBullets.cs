@@ -14,21 +14,23 @@ public class FireBullets : MonoBehaviour
     public GameObject particlesPrefab;
 
     void Start() {
-        firepoint = transform.Find("FirePoint");
+        firepoint = transform.parent;
         lineRenderer = transform.root.Find("Line").GetComponent<LineRenderer>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
     
     public IEnumerator FireBullet(Vector3 mousePos) {
+        
+        lineRenderer.positionCount = 1;
+        lineRenderer.SetPosition(0, firepoint.position);
+        StartCoroutine(Camera.main.GetComponent<CameraControl>().cameraShake(0.05f,0.5f));
+
+
+        Vector3 direction = new Vector3(mousePos.x - firepoint.position.x, mousePos.y - firepoint.position.y, 0);
+        RaycastHit2D rayInfo = Physics2D.Raycast(firepoint.position, direction);
+
+        
         if (!inWall) {
-            lineRenderer.positionCount = 1;
-            lineRenderer.SetPosition(0, firepoint.position);
-            StartCoroutine(Camera.main.GetComponent<CameraControl>().cameraShake(0.05f,0.5f));
-
-
-            Vector3 direction = new Vector3(mousePos.x - firepoint.position.x, mousePos.y - firepoint.position.y, 0);
-            RaycastHit2D rayInfo = Physics2D.Raycast(firepoint.position, direction);
-            
             for (int i = 0; i < reflections; i ++) {
                 if (rayInfo) {
                     lineRenderer.positionCount++;
@@ -50,12 +52,13 @@ public class FireBullets : MonoBehaviour
                     lineRenderer.SetPosition(lineRenderer.positionCount-1, direction * 100);
                 }
             }
-
-            lineRenderer.enabled = true;
-            yield return new WaitForSeconds(0.025f);
-            lineRenderer.enabled = false;
         }
+        
 
+        lineRenderer.enabled = true;
+        yield return new WaitForSeconds(0.025f);
+        lineRenderer.enabled = false;
+        
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -65,7 +68,7 @@ public class FireBullets : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D other) {
-    if (other.gameObject.layer == 8)
-        inWall = false;
+        if (other.gameObject.layer == 8)
+            inWall = false;
     }
 }

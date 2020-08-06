@@ -19818,7 +19818,7 @@ SpriteRenderer:
   m_Size: {x: 12.5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1519496465
@@ -19842,6 +19842,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1565123778258087712, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1909229151247645200, guid: bbebe6ba9b5167346856d9edd3374744,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -20016,6 +20021,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589794568364681676, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802411679663341592, guid: bbebe6ba9b5167346856d9edd3374744,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 117.600006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbebe6ba9b5167346856d9edd3374744, type: 3}

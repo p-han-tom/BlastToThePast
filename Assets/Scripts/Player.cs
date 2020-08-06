@@ -58,8 +58,11 @@ public class Player : Rewinder
 
     void Update()
     {
-        CheckInput();
-        RotateGun();
+        if (Time.timeScale == 1) {
+            CheckInput();
+            RotateGun();
+        }
+        
     }
     void FixedUpdate()
     {
@@ -156,6 +159,8 @@ public class Player : Rewinder
     {
         pivot.localScale = (mousePos.x > transform.position.x) ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         pivot.up = direction;
+        
+        
 
     }
     public bool getIsGrounded()

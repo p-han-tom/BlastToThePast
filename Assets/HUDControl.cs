@@ -16,6 +16,8 @@ public class HUDControl : MonoBehaviour
     private AudioManager audioManager;
     private GameObject restartPrompt;
 
+    private bool paused;
+
     void Start()
     {
         rewindsDisplay = transform.Find("Rewinds").GetComponent<TextMeshProUGUI>();
@@ -49,6 +51,17 @@ public class HUDControl : MonoBehaviour
         {
             audioManager.Play("RestartLevel");
             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        }
+
+        // Listen for pause
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (paused) {
+                Time.timeScale = 0;
+                paused = false;
+            } else {
+                Time.timeScale = 1;
+                paused = true;
+            }
         }
     }
     public void PromptRestart() {restartPrompt.SetActive(true);}
