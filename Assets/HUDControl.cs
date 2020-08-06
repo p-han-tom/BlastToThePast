@@ -15,6 +15,8 @@ public class HUDControl : MonoBehaviour
     private TextMeshProUGUI timerDisplay;
     private AudioManager audioManager;
     private GameObject restartPrompt;
+    private GameObject instructions;
+    private GameObject pauseMenu;
 
     public bool paused = false;
 
@@ -25,6 +27,10 @@ public class HUDControl : MonoBehaviour
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         restartPrompt = transform.Find("RestartPrompt").gameObject;
         restartPrompt.SetActive(false);
+        instructions = transform.Find("Instructions").gameObject;
+        instructions.SetActive(false);
+        pauseMenu = transform.Find("Pause Menu").gameObject;
+        pauseMenu.SetActive(false);
     }
 
     public void IncreaseRewinds()
@@ -54,7 +60,7 @@ public class HUDControl : MonoBehaviour
         }
 
         // Listen for pause
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
             if (paused) {
                 Unpause();
             } else {
@@ -66,12 +72,19 @@ public class HUDControl : MonoBehaviour
     public void Pause() {
         Time.timeScale = 0;
         paused = true;
+        pauseMenu.SetActive(true);
     }
 
     public void Unpause() {
         Time.timeScale = 1;
         paused = false;
+        pauseMenu.SetActive(false);
     }
+    public void GoToHomeMenu() {
+        Debug.Log("GOING HOOOOOME");
+    }
+    public void EnableInstructions(){instructions.SetActive(true);}
+    public void DisableInstructions(){instructions.SetActive(false);}
     void Update()
     {
         UpdateTimer();
