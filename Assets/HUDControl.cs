@@ -16,7 +16,7 @@ public class HUDControl : MonoBehaviour
     private AudioManager audioManager;
     private GameObject restartPrompt;
 
-    private bool paused;
+    private bool paused = false;
 
     void Start()
     {
@@ -56,10 +56,10 @@ public class HUDControl : MonoBehaviour
         // Listen for pause
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (paused) {
-                Time.timeScale = 0;
-                paused = false;
-            } else {
                 Time.timeScale = 1;
+                paused = false;
+            } else  {
+                Time.timeScale = 0;
                 paused = true;
             }
         }
