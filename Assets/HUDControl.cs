@@ -22,8 +22,9 @@ public class HUDControl : MonoBehaviour
     private TextMeshProUGUI clearedHighscore;
     private GameObject levelSelectPopup;
     private String sceneName;
-
+    private StarThresholds starThresholds;
     public bool paused = false;
+    public Sprite emptyStar;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class HUDControl : MonoBehaviour
         levelSelectPopup = transform.Find("Level Select").gameObject;
         levelSelectPopup.SetActive(false);
         sceneName = SceneManager.GetActiveScene().name;
+        starThresholds = GameObject.Find("StarThresholds").GetComponent<StarThresholds>();
     }
 
     public void IncreaseRewinds()
@@ -100,9 +102,11 @@ public class HUDControl : MonoBehaviour
         int bestRewinds = PlayerPrefs.GetInt(levelKey + "BestRewinds", 19);
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
         float score = (19.999f - timer) * (19 - rewinds) * 10;
+        for (int i = starThresholds.HowManyStars(score)-1; i >= 0; i--) {
+
+        }
         if (highscore < score)
         {
-            Debug.Log("WEOFIJ");
             PlayerPrefs.SetFloat(levelKey + "Highscore", score);
             highscore = score;
             PlayerPrefs.SetFloat(levelKey + "BestTime", timer);
