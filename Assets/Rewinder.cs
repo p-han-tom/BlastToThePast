@@ -40,8 +40,10 @@ public class Rewinder : MonoBehaviour
 
     public virtual void Rewind()
     {
-        if (transform.CompareTag("Player"))
+        if (transform.CompareTag("Player")) {
             StartCoroutine(Camera.main.GetComponent<CameraControl>().cameraShake(0.05f,0.5f));
+            transform.GetComponent<Player>().isJumping = false;
+        }
 
         GameObject.Find("HUD").GetComponent<HUDControl>().IncreaseRewinds();
         transform.position = rewindPositions[rewindIndex];

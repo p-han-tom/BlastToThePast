@@ -14,9 +14,9 @@ public class Player : Rewinder
     // Movement and jump related variables
     public LayerMask groundLayer;
     bool isGrounded;
-    bool isJumping;
+    public bool isJumping;
     Transform feetPos;
-    float checkRadius = 0.1f;
+    float checkRadius = 0.25f;
     float movementSpeed = 5f;
     float jumpForce = 10f;
     float moveInput;
@@ -24,6 +24,9 @@ public class Player : Rewinder
     float jumpDuration = 0.2f;
     int orbCount = 0;
     PortalControl portal;
+
+    float coyoteTimer = 0;
+    float coyoteTime = 0.3f;
 
     // Aiming stuff
     Vector2 direction;
@@ -103,30 +106,29 @@ public class Player : Rewinder
     void Move()
     {
 
-        // if (transform.position.y > GetComponent<Collider2D>().bounds.size.y)
-        // {
-        //     Debug.Log("higher");
-        // }
         // Set jump variables
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, groundLayer);
         rb.gravityScale = (isGrounded) ? 5f : 8f;
 
-        if (isGrounded)
+        if (isGrounded) 
             animator.SetFloat("yVelocity", 0);
-        else
+        else {
+            if (rb.velocity.y < 0 && coyoteTimer == 0) 
+                coyoteTimer = coyoteTime;
             animator.SetFloat("yVelocity", rb.velocity.y);
-
+        }
         animator.SetBool("moving", ((rb.velocity.x >= -0.1f && rb.velocity.x <= 0.1f) || !isGrounded) ? false : true);
 
 
         // Start the jump
-        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && isGrounded && !isJumping)
+        if (Math.Abs(rb.velocity.y) <= 0.1f && Input.GetKey(KeyCode.W) && (isGrounded || coyoteTimer > 0) && !isJumping)
         {
             audioManager.Play("Jump");
             rb.velocity = Vector2.up * jumpForce;
             isJumping = true;
             jumpTimer = jumpDuration;
             Instantiate(jumpParticlePrefab, transform.position, Quaternion.identity);
+            coyoteTimer = 0;
         }
 
         // Jump higher while key is pressed
@@ -152,7 +154,8 @@ public class Player : Rewinder
         rb.velocity = new Vector2(moveInput * movementSpeed, rb.velocity.y);
         // Rotate entity while moving
         if (rb.velocity.x != 0) transform.localRotation = (rb.velocity.x < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-
+        
+        coyoteTimer -= Time.deltaTime;
     }
 
     void RotateGun()
