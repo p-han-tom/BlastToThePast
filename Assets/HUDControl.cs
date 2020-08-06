@@ -17,6 +17,10 @@ public class HUDControl : MonoBehaviour
     private GameObject restartPrompt;
     private GameObject instructions;
     private GameObject pauseMenu;
+    private GameObject clearedPopup;
+    private TextMeshProUGUI clearedStats;
+    private TextMeshProUGUI clearedHighscore;
+    private GameObject levelSelectPopup;
 
     public bool paused = false;
 
@@ -31,6 +35,10 @@ public class HUDControl : MonoBehaviour
         instructions.SetActive(false);
         pauseMenu = transform.Find("Pause Menu").gameObject;
         pauseMenu.SetActive(false);
+        clearedPopup = transform.Find("Cleared Popup").gameObject;
+        clearedPopup.SetActive(false);
+        levelSelectPopup = transform.Find("Level Select").gameObject;
+        levelSelectPopup.SetActive(false);
     }
 
     public void IncreaseRewinds()
@@ -75,6 +83,12 @@ public class HUDControl : MonoBehaviour
         paused = true;
         pauseMenu.SetActive(true);
     }
+    public void LevelCleared() {
+        clearedPopup.SetActive(true);
+        // clearedPopup.Find("Stats");
+        // .GetComponent<TextMeshProUGUI>().text = "Cleared in <color=#91a7ff>"+timer+" seconds</color> using <color=#42bd41>"+rewinds+" rewinds</color>";
+    }
+    public void GoToNextLevel() {Debug.Log("next level brah");}
     public void Unpause() {
         Time.timeScale = 1;
         paused = false;
@@ -87,7 +101,8 @@ public class HUDControl : MonoBehaviour
     }
     public void EnableInstructions(){instructions.SetActive(true);}
     public void DisableInstructions(){instructions.SetActive(false);}
-
+    public void EnableLevelSelect(){levelSelectPopup.SetActive(true);}
+    public void DisableLevelSelect(){levelSelectPopup.SetActive(false);}
     public void SelectLevel(string sceneName) {
         SceneManager.LoadScene(sceneName);
     }

@@ -205,6 +205,7 @@ public class Player : Rewinder
             spinTimeElapsed += Time.deltaTime;
             yield return null;
         }
+        hc.LevelCleared();
     }
     public void gainOrb()
     {
