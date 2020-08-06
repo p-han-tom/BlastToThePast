@@ -26,14 +26,14 @@ public class HUDControl : MonoBehaviour
     public bool paused = false;
     public Sprite emptyStar;
 
-    private List<string> levelOrder = new List<string>(){"E1","E2","E3","E4","E5","M1","M2","M3","M4","M5","H1","H2","H3","H4","H5"};
-    public static GameObject[] ministars;
+    private List<string> levelOrder = new List<string>() { "E1", "E2", "E3", "E4", "E5", "M1", "M2", "M3", "M4", "M5", "H1", "H2", "H3", "H4", "H5" };
+    private GameObject[] ministars;
     private int currentLevel;
     private TextMeshProUGUI currentLevelDisplay;
 
     void Start()
     {
-        if (ministars == null) ministars = GameObject.FindGameObjectsWithTag("Ministars");
+        ministars = GameObject.FindGameObjectsWithTag("Ministars");
         rewindsDisplay = transform.Find("Rewinds").GetComponent<TextMeshProUGUI>();
         timerDisplay = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
@@ -55,13 +55,19 @@ public class HUDControl : MonoBehaviour
         currentLevel = levelOrder.IndexOf(SceneManager.GetActiveScene().name);
         currentLevelDisplay = transform.Find("Current Level").GetComponent<TextMeshProUGUI>();
 
-        if (currentLevel <= 4) {
-            currentLevelDisplay.text = "Level: Easy " + (currentLevel+1);
-        } else if (currentLevel <= 9) {
-            currentLevelDisplay.text = "Level: Medium " + (currentLevel%5 + 1);
-        } else {
-            currentLevelDisplay.text = "Level: Hard " + (currentLevel%5 + 1);
+        if (currentLevel <= 4)
+        {
+            currentLevelDisplay.text = "Level: Easy " + (currentLevel + 1);
         }
+        else if (currentLevel <= 9)
+        {
+            currentLevelDisplay.text = "Level: Medium " + (currentLevel % 5 + 1);
+        }
+        else
+        {
+            currentLevelDisplay.text = "Level: Hard " + (currentLevel % 5 + 1);
+        }
+        UpdateAllLevelMinistars();
     }
 
     public void IncreaseRewinds()
@@ -107,7 +113,6 @@ public class HUDControl : MonoBehaviour
     public void PromptRestart() { restartPrompt.SetActive(true); }
     public void Pause()
     {
-        PlayerPrefs.DeleteAll();
         Time.timeScale = 0;
         paused = true;
         pauseMenu.SetActive(true);
@@ -120,7 +125,8 @@ public class HUDControl : MonoBehaviour
         float highscore = PlayerPrefs.GetFloat(levelKey + "Highscore", 0);
         float score = (19.999f - timer) * (14 - rewinds) * 10;
         int stars = starThresholds.HowManyStars(score);
-        for (int i = 2; i > stars-1; i--) {
+        for (int i = 2; i > stars - 1; i--)
+        {
             clearedPopup.transform.Find("Stars").GetChild(i).GetComponent<Image>().sprite = emptyStar;
         }
         if (highscore < score)
@@ -131,7 +137,7 @@ public class HUDControl : MonoBehaviour
             bestTime = timer;
             PlayerPrefs.SetInt(levelKey + "BestRewinds", rewinds);
             bestRewinds = rewinds;
-            PlayerPrefs.SetInt(levelKey+"Stars", stars);
+            PlayerPrefs.SetInt(levelKey + "Stars", stars);
             clearedStats.text = "<size=60><color=#ffa726>new highscore!</color></size>";
             clearedHighscore.text = "<color=#ffa726>Best clear</color>: <color=#91a7ff>" + Math.Round(bestTime, 3) + " seconds</color> using <color=#42bd41>" + bestRewinds + " rewinds</color>\nHighscore: " + Math.Round(highscore, 0);
         }
@@ -141,13 +147,14 @@ public class HUDControl : MonoBehaviour
             clearedHighscore.text = "<color=#ffa726>Best clear</color>: <color=#91a7ff>" + Math.Round(bestTime, 3) + " seconds</color> using <color=#42bd41>" + bestRewinds + " rewinds</color>\nHighscore: " + Math.Round(highscore, 0);
         }
         clearedPopup.SetActive(true);
-        UpdateAllLevelMinistars();
     }
-    public void GoToNextLevel() { 
-        if (currentLevel == levelOrder.Count-1) 
+    public void GoToNextLevel()
+    {
+        Unpause();
+        if (currentLevel == levelOrder.Count - 1)
             SceneManager.LoadScene(levelOrder[0]);
         else
-            SceneManager.LoadScene(levelOrder[currentLevel+1]);
+            SceneManager.LoadScene(levelOrder[currentLevel + 1]);
         PlayerPrefs.SetString("Loaded", "false");
 
     }
@@ -165,19 +172,27 @@ public class HUDControl : MonoBehaviour
         PlayerPrefs.SetString("Loaded", "false");
 
     }
-    public void EnableInstructions() { instructions.SetActive(true); }
+    public void EnableInstructions() { instructions.SetActive(true); 
+    PlayerPrefs.DeleteAll();}
     public void DisableInstructions() { instructions.SetActive(false); }
-    public void EnableLevelSelect() { levelSelectPopup.SetActive(true); }
+    public void EnableLevelSelect()
+    {
+        UpdateAllLevelMinistars();
+        levelSelectPopup.SetActive(true);
+    }
     public void DisableLevelSelect() { levelSelectPopup.SetActive(false); }
     public void SelectLevel(string sceneName)
     {
+        Unpause();
         SceneManager.LoadScene(sceneName);
         PlayerPrefs.SetString("Loaded", "false");
         StartCoroutine(GameObject.Find("LevelLoader").GetComponent<LevelLoader>().fade(sceneName));
 
     }
-    public void UpdateAllLevelMinistars() {
-        foreach (GameObject m in ministars) {
+    public void UpdateAllLevelMinistars()
+    {
+        foreach (GameObject m in ministars)
+        {
             m.GetComponent<MinistarsControl>().UpdateMinistars();
         }
     }
