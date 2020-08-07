@@ -153,7 +153,7 @@ public class HUDControl : MonoBehaviour
     {
         Unpause();
         if (currentLevel == levelOrder.Count - 1)
-            SceneManager.LoadScene(levelOrder[0]);
+            SceneManager.LoadScene("Main Menu");
         else
             SceneManager.LoadScene(levelOrder[currentLevel + 1]);
         PlayerPrefs.SetString("Loaded", "false");
